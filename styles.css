@@ -105,7 +105,7 @@ h1 {
 .cat-shape[data-label="below"] .cat-label { top: calc(100% + 6px); }
 .cat-shape[data-label="above"] .cat-label { bottom: calc(100% + 4px); }
 .cat-shape[data-label="right"] .cat-label { left: calc(100% + 12px); top: 42%; }
-.composition.filtered .cat-shape:not([aria-pressed="true"]) .f { opacity: .18; }
+.composition.filtered .cat-shape:not([aria-pressed="true"]) .f { opacity: .3; }
 .cat-shape[aria-pressed="true"] .cat-label { font-weight: 700; }
 .cat-shape:hover .f { opacity: 1; }
 .cat-shape:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
@@ -146,6 +146,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; }
   background: var(--card);
   border: 0;
   cursor: pointer;
+  transition: background-color .12s ease, color .12s ease;
 }
 #types .chip { padding: 8px 16px; }
 .chip[data-cat]:not([data-cat=""])::before {
@@ -218,6 +219,7 @@ footer {
   border-top: 4px solid var(--line);
   color: var(--muted);
 }
+footer p { max-width: 62ch; }
 code { font-size: .95em; background: var(--card); padding: 1px 6px; border: 1px solid var(--line); }
 
 /* ---------- Mòbil ---------- */
@@ -244,7 +246,7 @@ code { font-size: .95em; background: var(--card); padding: 1px 6px; border: 1px 
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cat-shape .f { transition: none; }
+  .cat-shape .f, .chip { transition: none; }
 }
 
 @media (pointer: coarse) {

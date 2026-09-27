@@ -67,7 +67,10 @@ function chip(label, value) {
 $cats.append(chip("Totes", ""));
 for (const c of CATEGORIES) $cats.append(chip(c, c));
 
-for (const c of CATEGORIES) {
+// Les formes s'afegeixen en ordre de lectura (de dalt a baix, d'esquerra a dreta)
+// perquè el tabulador i el lector de pantalla segueixin l'ordre visual.
+const byReadingOrder = CATEGORIES.filter(c => SLOTS[c]).sort((a, b) => SLOTS[a].y - SLOTS[b].y || SLOTS[a].x - SLOTS[b].x);
+for (const c of byReadingOrder) {
   const n = SKILLS.filter(s => s.categoria === c).length;
   const slot = SLOTS[c];
   if (!n || !slot) continue;
