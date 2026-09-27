@@ -52,6 +52,14 @@ body {
   line-height: 1.5;
 }
 
+.skip {
+  position: absolute; left: 16px; top: -100px; z-index: 20;
+  padding: 10px 16px;
+  font-weight: 700; color: var(--paper); background: var(--ink);
+}
+.skip:focus { top: 16px; outline: 3px solid var(--blue); outline-offset: 2px; }
+main:focus { outline: none; }
+
 .visually-hidden {
   position: absolute; width: 1px; height: 1px; overflow: hidden;
   clip: rect(0 0 0 0); white-space: nowrap;
@@ -229,9 +237,16 @@ code { font-size: .95em; background: var(--card); padding: 1px 6px; border: 1px 
   .group-count { margin: 0 0 0 auto; }
   .entries { grid-template-columns: 1fr; }
   #cats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .chip { min-height: 48px; }
+  /* Amplia l'àrea tàctil de les formes petites sense canviar-ne la mida visible. */
+  .cat-shape::before { content: ""; position: absolute; inset: -6px; }
   #types { grid-template-columns: repeat(2, minmax(0, 1fr)); width: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .cat-shape .f { transition: none; }
+}
+
+@media (pointer: coarse) {
+  .chip { min-height: 48px; }
 }

@@ -60,12 +60,36 @@ function press(group, attr, value) {
   for (const b of group.querySelectorAll("button")) b.setAttribute("aria-pressed", String(b.dataset[attr] === value));
 }
 
+// La categoria seleccionada viu a l'adreça (…#codi) perquè es pugui compartir.
+function slug(c) {
+  return c.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+function catFromHash() {
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (!h) return "";
+  return CATEGORIES.find(c => slug(c) === h); // undefined si el hash no és una categoria (p. ex. #main)
+}
+function writeHash(cat) {
+  try {
+    history.replaceState(null, "", cat ? `#${slug(cat)}` : location.pathname + location.search);
+  } catch { /* alguns entorns incrustats no deixen canviar l'adreça */ }
+}
+
+function setCat(value) {
+  state.cat = value;
+  press($cats, "cat", value);
+  writeHash(value);
+  render();
+}
+
 $cats.addEventListener("click", e => {
   const b = e.target.closest(".cat");
-  if (!b) return;
-  state.cat = b.dataset.cat;
-  press($cats, "cat", state.cat);
-  render();
+  if (b) setCat(b.dataset.cat);
+});
+
+addEventListener("hashchange", () => {
+  const c = catFromHash();
+  if (c !== undefined) setCat(c);
 });
 
 $types.addEventListener("click", e => {
@@ -83,10 +107,9 @@ $q.addEventListener("input", () => {
 
 document.getElementById("reset").addEventListener("click", () => {
   $q.value = "";
-  Object.assign(state, { q: "", cat: "", type: "" });
-  press($cats, "cat", "");
+  Object.assign(state, { q: "", type: "" });
   press($types, "type", "");
-  render();
+  setCat("");
   $q.focus();
 });
 
@@ -147,7 +170,10 @@ function row(s) {
   main.append(top, d, m);
   inner.append(main);
   if (s.url) {
-    inner.setAttribute("aria-label", `${s.nom}, obre el repositori a GitHub`);
+    const note = document.createElement("span");
+    note.className = "visually-hidden";
+    note.textContent = "Obre el repositori a GitHub en una pestanya nova.";
+    main.append(note);
     inner.append(icon("ph-caret-right"));
   }
   li.append(inner);
@@ -187,4 +213,6 @@ function render() {
     : `${list.length} de ${SKILLS.length} skills`;
 }
 
-render();
+const initial = catFromHash();
+if (initial) setCat(initial);
+else render();

@@ -11,6 +11,8 @@ Hi ha dues versions que comparteixen les dades de `skills.js`:
 
 Obre qualsevol dels dos fitxers al navegador. No cal compilar res.
 
+Per compartir el catàleg filtrat per una categoria, afegeix-la a l'adreça: `index.html#codi`, `apple.html#disseny`, `#automatitzacio`… (en minúscules i sense accents).
+
 ## Com afegir una skill
 
 Afegeix un objecte a la llista `SKILLS` de `skills.js`:

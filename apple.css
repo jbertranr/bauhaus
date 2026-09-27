@@ -10,6 +10,7 @@
   --bar: rgba(255, 255, 255, .72);
   --control: #f0f0f2;
   --control-on: #ffffff;
+  --placeholder: #636366;
   /* Colors de sistema d'Apple, un per categoria. En clar, les variants accessibles (contrast >= 3:1 sobre blanc). */
   --c-blue: #007aff;
   --c-pink: #e3264a;
@@ -45,6 +46,7 @@
     --soft: 24%;
     --icon-mix: 80%;
     --control-on: #636366;
+    --placeholder: #a1a1a6;
     color-scheme: dark;
   }
 }
@@ -69,6 +71,7 @@
   --soft: 24%;
   --icon-mix: 80%;
   --control-on: #636366;
+  --placeholder: #a1a1a6;
   color-scheme: dark;
 }
 
@@ -89,6 +92,18 @@ a { color: var(--link); text-decoration: none; }
 a:hover { text-decoration: underline; }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 
+/* La barra superior és fixa: que no tapi l'element amb el focus en desplaçar-se. */
+html { scroll-padding-top: 68px; }
+
+.skip {
+  position: absolute; left: 16px; top: -100px; z-index: 20;
+  padding: 10px 18px;
+  color: var(--bg); background: var(--text);
+  border-radius: 980px; font-size: 15px;
+}
+.skip:focus { top: 8px; text-decoration: none; }
+main:focus { outline: none; }
+
 .visually-hidden {
   position: absolute; width: 1px; height: 1px; overflow: hidden;
   clip: rect(0 0 0 0); white-space: nowrap;
@@ -107,7 +122,8 @@ a:hover { text-decoration: underline; }
   max-width: 980px; height: 52px; margin: 0 auto; padding: 0 22px;
 }
 .bar-title { font-size: 21px; font-weight: 600; }
-.bar-link { font-size: 14px; }
+/* Àrea clicable de 44 px d'alt sense canviar com es veu. */
+.bar-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; font-size: 14px; }
 
 /* ---------- Capçalera ---------- */
 .hero { max-width: 980px; margin: 0 auto; padding: 88px 22px 40px; text-align: center; }
@@ -136,6 +152,7 @@ h1 {
   border-radius: 12px;
   outline: none;
 }
+.search input::placeholder { color: var(--placeholder); opacity: 1; }
 .search input:focus-visible { border-color: var(--focus); box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 30%, transparent); }
 
 /* ---------- Categories: fila d'icones, com la navegació d'una botiga ---------- */
@@ -250,6 +267,13 @@ code { font-size: 12px; }
   .row-inner { padding-left: 16px; }
   .row + .row::before { left: 16px; }
   .segmented { width: 100%; }
-  .segmented button { flex: 1; padding: 6px 4px; }
-  footer p { padding: 20px 16px; }
+  .segmented button { flex: 1; min-height: 44px; padding: 6px 4px; }
+  .cat { font-size: 13px; }
+  .row-meta { font-size: 14px; }
+  footer p { padding: 20px 16px; font-size: 13px; }
+}
+
+/* Pantalles tàctils grans (tauletes): el mateix mínim de 44 px. */
+@media (pointer: coarse) {
+  .segmented button { min-height: 44px; }
 }

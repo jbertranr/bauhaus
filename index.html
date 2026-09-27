@@ -8,9 +8,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260927b">
+  <link rel="stylesheet" href="styles.css?v=20260927e">
 </head>
 <body>
+  <a class="skip" href="#main">Salta al catàleg</a>
   <header class="hero">
     <div class="hero-text">
       <h1>Skills<br>de Claude</h1>
@@ -19,7 +20,7 @@
     <div class="composition" id="composition" role="group" aria-label="Categories, amb la mida segons el nombre de skills"></div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <section class="controls" aria-label="Filtres">
       <label class="search">
         <span class="visually-hidden">Cerca una skill</span>
@@ -46,7 +47,7 @@
     <p>Per afegir una skill, edita <code>skills.js</code>. Les <strong>integrades</strong> venen amb Claude, les <strong>de plugins</strong> s'instal·len des del directori de plugins i les <strong>de GitHub</strong> es copien a la carpeta de skills.</p>
   </footer>
 
-  <script src="skills.js?v=20260927b"></script>
-  <script src="app.js?v=20260927b"></script>
+  <script src="skills.js?v=20260927e"></script>
+  <script src="app.js?v=20260927e"></script>
 </body>
 </html>

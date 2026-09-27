@@ -94,9 +94,25 @@ function press(group, btn) {
   for (const b of group.querySelectorAll(".chip")) b.setAttribute("aria-pressed", String(b === btn));
 }
 
+// La categoria seleccionada viu a l'adreça (…#codi) perquè es pugui compartir.
+function slug(c) {
+  return c.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+function catFromHash() {
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (!h) return "";
+  return CATEGORIES.find(c => slug(c) === h); // undefined si el hash no és una categoria (p. ex. #main)
+}
+function writeHash(cat) {
+  try {
+    history.replaceState(null, "", cat ? `#${slug(cat)}` : location.pathname + location.search);
+  } catch { /* alguns entorns incrustats no deixen canviar l'adreça */ }
+}
+
 // La barra de blocs i les formes de la capçalera filtren igual i es mantenen sincronitzades.
 function setCat(value) {
   state.cat = value;
+  writeHash(value);
   for (const b of $cats.querySelectorAll(".chip")) b.setAttribute("aria-pressed", String(b.dataset.cat === value));
   for (const b of $comp.querySelectorAll(".cat-shape")) b.setAttribute("aria-pressed", String(b.dataset.cat === value));
   $comp.classList.toggle("filtered", value !== "");
@@ -106,6 +122,11 @@ function setCat(value) {
 $cats.addEventListener("click", e => {
   const b = e.target.closest(".chip");
   if (b) setCat(b.dataset.cat);
+});
+
+addEventListener("hashchange", () => {
+  const c = catFromHash();
+  if (c !== undefined) setCat(c);
 });
 
 $comp.addEventListener("click", e => {
@@ -172,6 +193,12 @@ function entry(s) {
     ? Object.assign(document.createElement("a"), { href: s.url, target: "_blank", rel: "noopener" })
     : document.createElement("span");
   name.textContent = s.nom;
+  if (s.url) {
+    const note = document.createElement("span");
+    note.className = "visually-hidden";
+    note.textContent = " (s'obre en una pestanya nova)";
+    name.append(note);
+  }
   const h = document.createElement("h3");
   h.append(name);
   const tag = document.createElement("span");
@@ -224,4 +251,6 @@ function render() {
     : `Se'n mostren ${list.length} de ${SKILLS.length}`;
 }
 
-render();
+const initial = catFromHash();
+if (initial) setCat(initial);
+else render();
