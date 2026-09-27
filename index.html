@@ -14,14 +14,9 @@
   <header class="hero">
     <div class="hero-text">
       <h1>Skills<br>de Claude</h1>
-      <p class="lede">Un índex de les capacitats que pots afegir a Claude, ordenades per a què serveixen.</p>
+      <p class="lede" id="lede">Capacitats que pots afegir a Claude, agrupades per a què serveixen.</p>
     </div>
-    <div class="hero-art" aria-hidden="true">
-      <span class="shape circle"></span>
-      <span class="shape square"></span>
-      <span class="shape triangle"></span>
-      <span class="shape bar"></span>
-    </div>
+    <div class="composition" id="composition" role="group" aria-label="Categories, amb la mida segons el nombre de skills"></div>
   </header>
 
   <main>
@@ -44,7 +39,7 @@
     </section>
 
     <div id="index" class="index"></div>
-    <p id="empty" class="empty" hidden>Cap skill coincideix amb la cerca.</p>
+    <p id="empty" class="empty" hidden><span id="empty-msg"></span> Prova una altra paraula o <button type="button" id="reset">Treu els filtres</button></p>
   </main>
 
   <footer>

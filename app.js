@@ -3,7 +3,7 @@
 const ON = {
   "var(--blue)": "var(--on-accent)",
   "var(--red)": "var(--on-accent)",
-  "var(--yellow)": "#141414",
+  "var(--yellow)": "#000",
   "var(--ink)": "var(--paper)",
 };
 
@@ -16,6 +16,21 @@ const STYLE = {
   "Recerca":        { color: "var(--red)",    shape: "triangle" },
   "Automatització": { color: "var(--yellow)", shape: "circle" },
 };
+
+// On va cada forma a la composició de la capçalera, en px d'una caixa de 640 × 480.
+// La mida surt de les dades; la posició està triada a mà perquè la composició quedi equilibrada.
+// Una categoria nova necessita el seu lloc aquí.
+const SLOTS = {
+  "Disseny":        { x: 290, y: 10,  label: "right" },
+  "Codi":           { x: 130, y: 160, label: "above" },
+  "Documents":      { x: 0,   y: 310, label: "below" },
+  "Accessibilitat": { x: 330, y: 262, label: "below" },
+  "Automatització": { x: 480, y: 236, label: "below" },
+  "Recerca":        { x: 170, y: 340, label: "below" },
+  "Dades":          { x: 30,  y: 126, label: "above" },
+};
+const BOX = { w: 640, h: 480 };
+const UNIT = 58; // costat en px d'una categoria amb 1 skill; l'àrea creix amb el nombre de skills
 
 const TIPUS = {
   integrada: "Integrada",
@@ -30,6 +45,8 @@ const $empty = document.getElementById("empty");
 const $count = document.getElementById("count");
 const $cats = document.getElementById("cats");
 const $types = document.getElementById("types");
+const $comp = document.getElementById("composition");
+const $q = document.getElementById("q");
 
 function chip(label, value) {
   const b = document.createElement("button");
@@ -50,16 +67,51 @@ function chip(label, value) {
 $cats.append(chip("Totes", ""));
 for (const c of CATEGORIES) $cats.append(chip(c, c));
 
+for (const c of CATEGORIES) {
+  const n = SKILLS.filter(s => s.categoria === c).length;
+  const slot = SLOTS[c];
+  if (!n || !slot) continue;
+  const st = STYLE[c];
+  const side = Math.sqrt(n) * UNIT;
+  const w = st.shape === "triangle" ? side * 1.15 : side;
+  const b = document.createElement("button");
+  b.type = "button";
+  b.className = `cat-shape ${st.shape}`;
+  b.dataset.cat = c;
+  b.dataset.label = slot.label;
+  b.setAttribute("aria-pressed", "false");
+  b.style.setProperty("--c", st.color);
+  b.style.left = `${slot.x / BOX.w * 100}%`;
+  b.style.top = `${slot.y / BOX.h * 100}%`;
+  b.style.width = `${w / BOX.w * 100}%`;
+  b.style.height = `${side / BOX.h * 100}%`;
+  b.innerHTML = `<span class="f" aria-hidden="true"></span><span class="cat-label"><b>${n}</b><span class="name">${c}</span></span>`;
+  $comp.append(b);
+}
+
 function press(group, btn) {
   for (const b of group.querySelectorAll(".chip")) b.setAttribute("aria-pressed", String(b === btn));
 }
 
+// La barra de blocs i les formes de la capçalera filtren igual i es mantenen sincronitzades.
+function setCat(value) {
+  state.cat = value;
+  for (const b of $cats.querySelectorAll(".chip")) b.setAttribute("aria-pressed", String(b.dataset.cat === value));
+  for (const b of $comp.querySelectorAll(".cat-shape")) b.setAttribute("aria-pressed", String(b.dataset.cat === value));
+  $comp.classList.toggle("filtered", value !== "");
+  render();
+}
+
 $cats.addEventListener("click", e => {
   const b = e.target.closest(".chip");
+  if (b) setCat(b.dataset.cat);
+});
+
+$comp.addEventListener("click", e => {
+  const b = e.target.closest(".cat-shape");
   if (!b) return;
-  state.cat = b.dataset.cat;
-  press($cats, b);
-  render();
+  // Tornar a clicar la forma seleccionada treu el filtre.
+  setCat(state.cat === b.dataset.cat ? "" : b.dataset.cat);
 });
 
 $types.addEventListener("click", e => {
@@ -70,10 +122,22 @@ $types.addEventListener("click", e => {
   render();
 });
 
-document.getElementById("q").addEventListener("input", e => {
+$q.addEventListener("input", e => {
   state.q = e.target.value.trim().toLowerCase();
   render();
 });
+
+document.getElementById("reset").addEventListener("click", () => {
+  $q.value = "";
+  state.q = "";
+  state.type = "";
+  press($types, $types.querySelector('[data-type=""]'));
+  setCat("");
+  $q.focus();
+});
+
+document.getElementById("lede").textContent =
+  `${SKILLS.length} capacitats que pots afegir a Claude, agrupades per a què serveixen.`;
 
 function matches(s) {
   if (state.cat && s.categoria !== state.cat) return false;
@@ -88,9 +152,16 @@ function joinCa(items) {
   return items.length < 2 ? items.join("") : items.slice(0, -1).join(", ") + " i " + items.at(-1);
 }
 
+// "D'Anthropic", "de la comunitat", "de Shopify".
+function de(autor) {
+  if (autor === "Comunitat") return "de la comunitat";
+  return /^[aeiouàèéíòóú]/i.test(autor) ? `d'${autor}` : `de ${autor}`;
+}
+
 function origin(s) {
-  if (s.plugin) return `${s.autor}, dins del plugin ${s.plugin}`;
-  return s.autor;
+  const who = de(s.autor);
+  const text = s.plugin ? `${who}, dins del plugin ${s.plugin}` : who;
+  return text[0].toUpperCase() + text.slice(1);
 }
 
 function entry(s) {
@@ -111,7 +182,7 @@ function entry(s) {
   d.textContent = s.descripcio;
   const m = document.createElement("p");
   m.className = "meta";
-  m.textContent = `De ${origin(s)}. Funciona a ${joinCa(s.on)}.`;
+  m.textContent = `${origin(s)}. Funciona a ${joinCa(s.on)}.`;
   li.append(h, d, m);
   return li;
 }
@@ -144,6 +215,9 @@ function render() {
     .filter(([, l]) => l.length);
   $index.replaceChildren(...groups.map(([c, l]) => group(c, l)));
   $empty.hidden = list.length > 0;
+  document.getElementById("empty-msg").textContent = state.q
+    ? `Cap skill coincideix amb «${$q.value.trim()}».`
+    : "Cap skill coincideix amb aquests filtres.";
   $count.textContent = list.length === SKILLS.length
     ? `${SKILLS.length} skills en total`
     : `Se'n mostren ${list.length} de ${SKILLS.length}`;

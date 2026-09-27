@@ -2,12 +2,13 @@
   --red: #d7263d;
   --blue: #1b4dbd;
   --yellow: #f4c20d;
-  --ink: #141414;
-  --paper: #f4f4f2;
+  --ink: #000000;
+  --paper: #ffffff;
   --card: #ffffff;
-  --muted: #55555a;
-  --line: #141414;
-  --on-accent: #fff;
+  --hover: #ececec;
+  --muted: #4a4a4a;
+  --line: #000000;
+  --on-accent: #ffffff;
   color-scheme: light;
 }
 
@@ -16,12 +17,13 @@
     --red: #ef4c5f;
     --blue: #5b85ea;
     --yellow: #f7cf3c;
-    --ink: #f0ebe0;
-    --paper: #121212;
-    --card: #1c1c1c;
-    --muted: #a9a398;
-    --line: #f0ebe0;
-    --on-accent: #121212;
+    --ink: #ffffff;
+    --paper: #000000;
+    --card: #000000;
+    --hover: #222222;
+    --muted: #b5b5b5;
+    --line: #ffffff;
+    --on-accent: #000000;
     color-scheme: dark;
   }
 }
@@ -29,12 +31,13 @@
   --red: #ef4c5f;
   --blue: #5b85ea;
   --yellow: #f7cf3c;
-  --ink: #f0ebe0;
-  --paper: #121212;
-  --card: #1c1c1c;
-  --muted: #a9a398;
-  --line: #f0ebe0;
-  --on-accent: #121212;
+  --ink: #ffffff;
+  --paper: #000000;
+  --card: #000000;
+  --hover: #222222;
+  --muted: #b5b5b5;
+  --line: #ffffff;
+  --on-accent: #000000;
   color-scheme: dark;
 }
 
@@ -45,7 +48,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: "Jost", "Futura", "Century Gothic", system-ui, sans-serif;
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.5;
 }
 
@@ -55,36 +58,49 @@ body {
 }
 
 /* ---------- Capçalera ---------- */
+/* Minúscules als títols: l'alfabet universal de Herbert Bayer (Bauhaus, 1925) no tenia majúscules. */
+h1, h2, .chip, .cat-label { text-transform: lowercase; }
+
 .hero {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 32px;
-  align-items: center;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 620px);
+  gap: 40px;
+  align-items: end;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 56px 24px 40px;
-  border-bottom: 4px solid var(--line);
+  padding: 56px 24px 48px;
+  border-bottom: 6px solid var(--line);
 }
 h1 {
   margin: 0;
-  font-size: clamp(3rem, 9vw, 6.5rem);
-  line-height: .9;
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  line-height: .88;
   font-weight: 800;
   letter-spacing: -.02em;
-  text-transform: uppercase;
 }
-.lede { max-width: 32ch; margin: 20px 0 0; font-size: 1.2rem; color: var(--muted); }
+.lede { max-width: 28ch; margin: 24px 0 0; font-size: 21px; color: var(--muted); }
 
-.hero-art { position: relative; aspect-ratio: 1; max-width: 360px; justify-self: end; width: 100%; }
-.shape { position: absolute; display: block; }
-.shape.circle   { width: 58%; aspect-ratio: 1; border-radius: 50%; background: var(--red); top: 0; right: 0; }
-.shape.square   { width: 46%; aspect-ratio: 1; background: var(--blue); bottom: 0; left: 0; }
-.shape.triangle {
-  width: 44%; aspect-ratio: 1; background: var(--yellow);
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
-  bottom: 0; right: 6%;
+/* El catàleg d'un cop d'ull: una forma per categoria, amb l'àrea proporcional al nombre de skills.
+   Posicions i mides en % d'una caixa de 640 × 480. */
+.composition { position: relative; aspect-ratio: 640 / 480; }
+.cat-shape {
+  position: absolute;
+  padding: 0; border: 0; background: none;
+  font: inherit; color: var(--ink);
+  cursor: pointer;
 }
-.shape.bar { width: 8%; height: 70%; background: var(--ink); left: 42%; top: 6%; }
+.cat-shape .f { display: block; width: 100%; height: 100%; background: var(--c); transition: opacity .15s ease; }
+.cat-shape.circle .f { border-radius: 50%; }
+.cat-shape.triangle .f { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.cat-label { position: absolute; left: 0; white-space: nowrap; font-size: 18px; font-weight: 500; line-height: 1.2; }
+.cat-label b { font-size: 24px; font-weight: 800; margin-right: 6px; }
+.cat-shape[data-label="below"] .cat-label { top: calc(100% + 6px); }
+.cat-shape[data-label="above"] .cat-label { bottom: calc(100% + 4px); }
+.cat-shape[data-label="right"] .cat-label { left: calc(100% + 12px); top: 42%; }
+.composition.filtered .cat-shape:not([aria-pressed="true"]) .f { opacity: .18; }
+.cat-shape[aria-pressed="true"] .cat-label { font-weight: 700; }
+.cat-shape:hover .f { opacity: 1; }
+.cat-shape:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
 
 /* ---------- Controls ---------- */
 main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; }
@@ -95,7 +111,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; }
   width: 100%;
   padding: 14px 18px;
   font: inherit;
-  font-size: 1.1rem;
+  font-size: 18px;
   color: var(--ink);
   background: var(--card);
   border: 3px solid var(--line);
@@ -117,7 +133,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; }
 .chip {
   display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
   padding: 12px 12px 10px;
-  font: inherit; font-size: 1rem; font-weight: 500; text-align: left;
+  font: inherit; font-size: 16px; font-weight: 500; text-align: left;
   color: var(--ink);
   background: var(--card);
   border: 0;
@@ -131,7 +147,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; }
 .chip[data-cat=""] { justify-content: flex-end; }
 .chip.circle::before { border-radius: 50%; }
 .chip.triangle::before { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
-.chip:hover { background: var(--paper); }
+.chip:hover { background: var(--hover); }
 .chip[aria-pressed="true"] { background: var(--fill, var(--ink)); color: var(--on-fill, var(--paper)); font-weight: 700; }
 .chip[data-cat][aria-pressed="true"]:not([data-cat=""])::before { background: currentColor; }
 .chip:focus-visible { outline: 3px solid var(--blue); outline-offset: -6px; }
@@ -151,7 +167,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; }
 .mark { display: block; width: 56px; height: 56px; margin-bottom: 14px; background: var(--accent); }
 .mark.circle { border-radius: 50%; }
 .mark.triangle { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
-.group-head h2 { margin: 0; font-size: 1.85rem; hyphens: auto; overflow-wrap: anywhere; font-weight: 800; line-height: 1.05; }
+.group-head h2 { margin: 0; font-size: 36px; hyphens: auto; overflow-wrap: anywhere; font-weight: 800; line-height: 1.05; }
 .group-count { display: block; margin-top: 4px; color: var(--muted); }
 
 .entries {
@@ -165,21 +181,28 @@ main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; }
 .entry h3 {
   display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px;
   margin: 0 0 6px;
-  font-size: 1.3rem; font-weight: 700; line-height: 1.2;
+  font-size: 24px; font-weight: 700; line-height: 1.2;
   overflow-wrap: anywhere;
 }
 .entry h3 a { color: inherit; text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-color: var(--accent); }
 .entry h3 a:hover { text-decoration-thickness: 4px; }
 .entry h3 a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 .desc { margin: 0 0 8px; }
-.meta { margin: 0; font-size: .92rem; color: var(--muted); }
+.meta { margin: 0; font-size: 14px; color: var(--muted); }
 
-.tag { font-size: .8rem; font-weight: 700; padding: 1px 7px; }
+.tag { font-size: 14px; font-weight: 700; padding: 1px 7px; }
 .tag.integrada { background: var(--blue); color: var(--on-accent); }
-.tag.plugin { background: var(--yellow); color: #141414; }
+.tag.plugin { background: var(--yellow); color: #000; }
 .tag.github { box-shadow: inset 0 0 0 2px var(--line); }
 
-.empty { font-size: 1.2rem; color: var(--muted); }
+.empty { font-size: 21px; }
+.empty button {
+  font: inherit; font-weight: 700;
+  padding: 4px 12px; margin-left: 4px;
+  color: var(--paper); background: var(--ink);
+  border: 0; cursor: pointer;
+}
+.empty button:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 
 footer {
   max-width: 1200px; margin: 0 auto; padding: 24px;
@@ -190,16 +213,24 @@ code { font-size: .95em; background: var(--card); padding: 1px 6px; border: 1px 
 
 /* ---------- Mòbil ---------- */
 @media (max-width: 720px) {
-  .hero { grid-template-columns: 1fr; padding: 32px 16px 28px; gap: 24px; }
-  .hero-art { max-width: 200px; justify-self: start; order: -1; }
+  .hero { grid-template-columns: 1fr; padding: 40px 16px 32px; gap: 20px; }
+  /* Deixa marge a la dreta perquè hi càpiguen les etiquetes de les formes. */
+  .composition { order: -1; margin: 24px 0 40px; width: calc(100% - 64px); }
+  /* En mòbil els noms es trepitjarien: només el nombre. La barra de sota dona els noms amb la mateixa forma i color. */
+  .cat-label .name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .cat-label b { font-size: 18px; margin: 0; }
   main { padding: 24px 16px 48px; }
   footer { padding: 20px 16px; }
   .group { grid-template-columns: 1fr; gap: 12px; padding: 20px 0 28px; }
   .group-head { position: static; display: flex; align-items: center; gap: 12px; }
   .mark { width: 32px; height: 32px; margin: 0; }
-  .group-head h2 { font-size: 1.6rem; }
+  .group-head h2 { font-size: 28px; }
   .group-count { margin: 0 0 0 auto; }
   .entries { grid-template-columns: 1fr; }
   #cats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   #types { grid-template-columns: repeat(2, minmax(0, 1fr)); width: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cat-shape .f { transition: none; }
 }
