@@ -4,7 +4,12 @@ Pàgina web estàtica d'estil Bauhaus que cataloga skills de Claude, amb cercado
 
 ## Com veure-la
 
-Obre `index.html` al navegador. No cal compilar res.
+Hi ha dues versions que comparteixen les dades de `skills.js`:
+
+- `index.html`: versió Bauhaus.
+- `apple.html`: versió minimalista a l'estil d'Apple, amb icones de Font Awesome 6.5.2 (carregades des de cdnjs).
+
+Obre qualsevol dels dos fitxers al navegador. No cal compilar res.
 
 ## Com afegir una skill
 
@@ -23,7 +28,8 @@ La `categoria` ha de ser una de les de `CATEGORIES`. Per crear-ne una de nova, a
 - `index.html`: estructura de la pàgina
 - `styles.css`: estils (temes clar i fosc, adaptat a mòbil)
 - `skills.js`: dades del catàleg
-- `app.js`: cerca, filtres i pintat de les targetes
+- `app.js`: cerca, filtres i pintat de la versió Bauhaus
+- `apple.css`, `apple.js`: estils i lògica de la versió minimalista
 
 ## Skills del projecte
 

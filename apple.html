@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skills de Claude</title>
+  <meta name="description" content="Catàleg de skills de Claude, en versió minimalista.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="apple.css">
+</head>
+<body>
+  <nav class="bar">
+    <div class="bar-inner">
+      <span class="bar-title">Skills de Claude</span>
+      <a class="bar-link" href="index.html">Versió Bauhaus</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <h1>Skills de Claude.</h1>
+    <p class="lede" id="lede">Capacitats que pots afegir a Claude, ordenades per a què serveixen.</p>
+
+    <label class="search">
+      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+      <span class="visually-hidden">Cerca una skill</span>
+      <input id="q" type="search" placeholder="Cerca skills" autocomplete="off">
+    </label>
+  </header>
+
+  <div class="cats-wrap">
+    <div class="cats" id="cats" role="group" aria-label="Categoria"></div>
+  </div>
+
+  <main>
+    <div class="toolbar">
+      <div class="segmented" id="types" role="group" aria-label="Tipus">
+        <button type="button" data-type="" aria-pressed="true">Totes</button>
+        <button type="button" data-type="integrada" aria-pressed="false">Integrades</button>
+        <button type="button" data-type="plugin" aria-pressed="false">Plugins</button>
+        <button type="button" data-type="github" aria-pressed="false">GitHub</button>
+      </div>
+      <p class="count" id="count" aria-live="polite"></p>
+    </div>
+
+    <div id="index"></div>
+
+    <div id="empty" class="empty" hidden>
+      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+      <p id="empty-msg"></p>
+      <button type="button" id="reset">Treu els filtres</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>Per afegir una skill, edita <code>skills.js</code>. Apareixerà en aquesta versió i a la <a href="index.html">versió Bauhaus</a>.</p>
+  </footer>
+
+  <script src="skills.js"></script>
+  <script src="apple.js"></script>
+</body>
+</html>
