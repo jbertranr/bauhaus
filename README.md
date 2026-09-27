@@ -7,7 +7,7 @@ Pàgina web estàtica d'estil Bauhaus que cataloga skills de Claude, amb cercado
 Hi ha dues versions que comparteixen les dades de `skills.js`:
 
 - `index.html`: versió Bauhaus.
-- `apple.html`: versió minimalista a l'estil d'Apple, amb icones de Font Awesome 6.5.2 (carregades des de cdnjs).
+- `apple.html`: versió minimalista a l'estil d'Apple, amb icones de Font Awesome Free 6.5.2. Les icones sòlides estan allotjades a `vendor/fontawesome/`, amb la seva llicència.
 
 Obre qualsevol dels dos fitxers al navegador. No cal compilar res.
 
