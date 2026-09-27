@@ -1,12 +1,12 @@
-// Versió minimalista: les mateixes dades de skills.js, amb una icona de Font Awesome per categoria.
+// Versió minimalista: les mateixes dades de skills.js, amb una icona de Phosphor (pes light) per categoria.
 const ICON = {
-  "Documents":      "fa-file-lines",
-  "Disseny":        "fa-pen-ruler",
-  "Accessibilitat": "fa-universal-access",
-  "Codi":           "fa-code",
-  "Dades":          "fa-chart-simple",
-  "Recerca":        "fa-flask",
-  "Automatització": "fa-gears",
+  "Documents":      "ph-file-text",
+  "Disseny":        "ph-pen-nib",
+  "Accessibilitat": "ph-person-arms-spread",
+  "Codi":           "ph-code",
+  "Dades":          "ph-chart-bar",
+  "Recerca":        "ph-flask",
+  "Automatització": "ph-gear-six",
 };
 
 const TIPUS = {
@@ -26,7 +26,7 @@ const $q = document.getElementById("q");
 
 function icon(name) {
   const i = document.createElement("i");
-  i.className = `fa-solid ${name}`;
+  i.className = `ph-light ${name}`;
   i.setAttribute("aria-hidden", "true");
   return i;
 }
@@ -41,7 +41,7 @@ function catButton(label, value, iconName) {
   return b;
 }
 
-$cats.append(catButton("Totes", "", "fa-table-cells-large"));
+$cats.append(catButton("Totes", "", "ph-squares-four"));
 for (const c of CATEGORIES) $cats.append(catButton(c, c, ICON[c]));
 
 function press(group, attr, value) {
@@ -126,7 +126,7 @@ function tile(s) {
     a.href = s.url;
     a.target = "_blank";
     a.rel = "noopener";
-    a.append("Veure-la a GitHub", icon("fa-chevron-right"));
+    a.append("Veure-la a GitHub", icon("ph-caret-right"));
     li.append(a);
   }
   return li;

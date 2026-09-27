@@ -97,7 +97,7 @@ h1 {
   position: relative; display: block;
   max-width: 560px; margin: 0 auto;
 }
-.search i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 15px; }
+.search i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 20px; }
 .search input {
   width: 100%;
   padding: 13px 18px 13px 46px;
@@ -128,10 +128,9 @@ h1 {
   border-bottom: 2px solid transparent;
   cursor: pointer;
 }
-.cat i { font-size: 24px; color: var(--text); opacity: .85; }
+.cat i { font-size: 30px; color: var(--text); }
 .cat:hover { color: var(--text); }
 .cat[aria-pressed="true"] { color: var(--text); border-bottom-color: var(--text); }
-.cat[aria-pressed="true"] i { opacity: 1; }
 
 /* ---------- Barra d'eines ---------- */
 main { max-width: 980px; margin: 0 auto; padding: 32px 22px 80px; }
@@ -156,7 +155,7 @@ main { max-width: 980px; margin: 0 auto; padding: 32px 22px 80px; }
 .section { padding-top: 48px; }
 .section-head { display: flex; align-items: baseline; gap: 12px; margin: 0 0 20px; }
 .section-head h2 { margin: 0; font-size: 32px; font-weight: 600; letter-spacing: -.01em; }
-.section-head i { font-size: 22px; color: var(--muted); }
+.section-head i { font-size: 28px; color: var(--muted); align-self: center; }
 .section-head span { font-size: 17px; color: var(--muted); }
 
 .tiles {
@@ -179,11 +178,11 @@ main { max-width: 980px; margin: 0 auto; padding: 32px 22px 80px; }
 .tile-desc { margin: 0 0 16px; flex: 1; }
 .tile-meta { margin: 0; font-size: 14px; color: var(--muted); }
 .tile-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 14px; }
-.tile-link i { font-size: 11px; }
+.tile-link i { font-size: 14px; }
 
 /* ---------- Estat buit ---------- */
 .empty { padding: 72px 0; text-align: center; color: var(--muted); }
-.empty i { font-size: 40px; opacity: .5; }
+.empty i { font-size: 48px; }
 .empty p { margin: 16px 0; font-size: 21px; color: var(--text); }
 .empty button {
   padding: 10px 20px;
