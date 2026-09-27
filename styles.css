@@ -157,7 +157,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; }
 /* ---------- Índex ---------- */
 .group {
   display: grid;
-  grid-template-columns: 270px 1fr;
+  grid-template-columns: 300px 1fr;
   gap: 32px;
   padding: 28px 0 36px;
   border-top: 6px solid var(--line);
@@ -167,7 +167,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; }
 .mark { display: block; width: 56px; height: 56px; margin-bottom: 14px; background: var(--accent); }
 .mark.circle { border-radius: 50%; }
 .mark.triangle { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
-.group-head h2 { margin: 0; font-size: 36px; hyphens: auto; overflow-wrap: anywhere; font-weight: 800; line-height: 1.05; }
+.group-head h2 { margin: 0; font-size: 36px; font-weight: 800; line-height: 1.05; }
 .group-count { display: block; margin-top: 4px; color: var(--muted); }
 
 .entries {
@@ -190,10 +190,11 @@ main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; }
 .desc { margin: 0 0 8px; }
 .meta { margin: 0; font-size: 14px; color: var(--muted); }
 
+/* Etiquetes de tipus en neutre: els primaris queden reservats per a les categories. */
 .tag { font-size: 14px; font-weight: 700; padding: 1px 7px; }
-.tag.integrada { background: var(--blue); color: var(--on-accent); }
-.tag.plugin { background: var(--yellow); color: #000; }
-.tag.github { box-shadow: inset 0 0 0 2px var(--line); }
+.tag.integrada { background: var(--ink); color: var(--paper); }
+.tag.plugin { box-shadow: inset 0 0 0 2px var(--line); }
+.tag.github { outline: 2px dashed var(--line); outline-offset: -2px; }
 
 .empty { font-size: 21px; }
 .empty button {

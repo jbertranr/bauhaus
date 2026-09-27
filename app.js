@@ -80,6 +80,7 @@ for (const c of CATEGORIES) {
   b.dataset.cat = c;
   b.dataset.label = slot.label;
   b.setAttribute("aria-pressed", "false");
+  b.setAttribute("aria-label", `${c}, ${n === 1 ? "1 skill" : `${n} skills`}`);
   b.style.setProperty("--c", st.color);
   b.style.left = `${slot.x / BOX.w * 100}%`;
   b.style.top = `${slot.y / BOX.h * 100}%`;
