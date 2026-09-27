@@ -24,3 +24,9 @@ La `categoria` ha de ser una de les de `CATEGORIES`. Per crear-ne una de nova, a
 - `styles.css`: estils (temes clar i fosc, adaptat a mòbil)
 - `skills.js`: dades del catàleg
 - `app.js`: cerca, filtres i pintat de les targetes
+
+## Skills del projecte
+
+A `.claude/skills/` hi ha skills que Claude Code carrega automàticament quan treballa en aquest repositori, tant a VS Code com al terminal o al web:
+
+- `frontend-design`: la skill oficial d'Anthropic per fer dissenys amb personalitat, que no semblin generats per IA (llicència Apache 2.0, a `LICENSE.txt`).
