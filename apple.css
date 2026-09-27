@@ -18,7 +18,9 @@
   --c-green: #248a3d;
   --c-teal: #008299;
   --c-purple: #a549d4;
-  --tint: 9%;
+  --tint: 5%;
+  --soft: 16%;
+  --icon-mix: 70%;
   color-scheme: light;
 }
 
@@ -41,7 +43,9 @@
     --c-green: #30d158;
     --c-teal: #40cbe0;
     --c-purple: #bf5af2;
-    --tint: 16%;
+    --tint: 9%;
+    --soft: 24%;
+    --icon-mix: 80%;
     --control-on: #636366;
     color-scheme: dark;
   }
@@ -64,7 +68,9 @@
   --c-green: #30d158;
   --c-teal: #40cbe0;
   --c-purple: #bf5af2;
-  --tint: 16%;
+  --tint: 9%;
+  --soft: 24%;
+  --icon-mix: 80%;
   --control-on: #636366;
   color-scheme: dark;
 }
@@ -153,9 +159,9 @@ h1 {
   border-bottom: 2px solid transparent;
   cursor: pointer;
 }
-.cat i { font-size: 30px; color: var(--c, var(--text)); }
+.cat i { font-size: 30px; color: color-mix(in srgb, var(--c, var(--text)) var(--icon-mix), var(--muted)); }
 .cat:hover { color: var(--text); }
-.cat[aria-pressed="true"] { color: var(--text); border-bottom-color: var(--c, var(--text)); }
+.cat[aria-pressed="true"] { color: var(--text); border-bottom-color: color-mix(in srgb, var(--c, var(--text)) var(--icon-mix), var(--muted)); }
 
 /* ---------- Barra d'eines ---------- */
 main { max-width: 980px; margin: 0 auto; padding: 32px 22px 80px; }
@@ -183,8 +189,8 @@ main { max-width: 980px; margin: 0 auto; padding: 32px 22px 80px; }
 .section-head i {
   display: grid; place-items: center;
   width: 40px; height: 40px; flex: none;
-  font-size: 26px; color: #fff;
-  background: var(--c); border-radius: 10px;
+  font-size: 26px; color: var(--c);
+  background: color-mix(in srgb, var(--c) var(--soft), var(--bg)); border-radius: 10px;
 }
 .section-head span { font-size: 17px; color: var(--muted); align-self: baseline; margin-top: 10px; }
 
