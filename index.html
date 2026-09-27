@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catàleg de Skills</title>
+  <meta name="description" content="Catàleg de skills de Claude, amb cercador i filtres per categoria i tipus.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-text">
+      <p class="kicker">Catàleg</p>
+      <h1>Skills<br>de Claude</h1>
+      <p class="lede">Les capacitats que pots afegir a Claude, ordenades per a què serveixen.</p>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <span class="shape circle"></span>
+      <span class="shape square"></span>
+      <span class="shape triangle"></span>
+      <span class="shape bar"></span>
+    </div>
+  </header>
+
+  <main>
+    <section class="controls" aria-label="Filtres">
+      <label class="search">
+        <span class="visually-hidden">Cerca una skill</span>
+        <input id="q" type="search" placeholder="Cerca per nom, descripció o plugin…" autocomplete="off">
+      </label>
+
+      <div class="filter-row" role="group" aria-label="Categoria" id="cats"></div>
+
+      <div class="filter-row" role="group" aria-label="Tipus" id="types">
+        <button type="button" class="chip" data-type="" aria-pressed="true">Totes</button>
+        <button type="button" class="chip" data-type="integrada" aria-pressed="false">Integrades</button>
+        <button type="button" class="chip" data-type="plugin" aria-pressed="false">De plugins</button>
+      </div>
+
+      <p class="count" id="count" aria-live="polite"></p>
+    </section>
+
+    <section id="grid" class="grid" aria-label="Skills"></section>
+    <p id="empty" class="empty" hidden>Cap skill coincideix amb la cerca.</p>
+  </main>
+
+  <footer>
+    <p>Per afegir una skill, edita <code>skills.js</code>. Les <strong>integrades</strong> venen amb Claude; les <strong>de plugins</strong> s'instal·len des del directori de plugins.</p>
+  </footer>
+
+  <script src="skills.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

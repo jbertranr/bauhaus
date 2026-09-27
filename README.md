@@ -1,0 +1,26 @@
+# Catàleg de skills de Claude
+
+Pàgina web estàtica d'estil Bauhaus que cataloga skills de Claude, amb cercador i filtres per categoria i per tipus (integrades o de plugins).
+
+## Com veure-la
+
+Obre `index.html` al navegador. No cal compilar res.
+
+## Com afegir una skill
+
+Afegeix un objecte a la llista `SKILLS` de `skills.js`:
+
+```js
+{ nom: "la-meva-skill", categoria: "Disseny", tipus: "plugin", autor: "Comunitat",
+  plugin: "nom-del-plugin", on: ["claude.ai", "Claude Code"],
+  descripcio: "Què fa, en una frase." },
+```
+
+La `categoria` ha de ser una de les de `CATEGORIES`. Per crear-ne una de nova, afegeix-la allà i dona-li un color i una forma a `STYLE`, a `app.js`.
+
+## Fitxers
+
+- `index.html`: estructura de la pàgina
+- `styles.css`: estils (temes clar i fosc, adaptat a mòbil)
+- `skills.js`: dades del catàleg
+- `app.js`: cerca, filtres i pintat de les targetes
