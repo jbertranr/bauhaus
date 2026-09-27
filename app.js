@@ -1,4 +1,12 @@
 // Cada categoria té un color i una forma bauhaus.
+// El text sobre cada color quan el filtre està seleccionat.
+const ON = {
+  "var(--blue)": "var(--on-accent)",
+  "var(--red)": "var(--on-accent)",
+  "var(--yellow)": "#141414",
+  "var(--ink)": "var(--paper)",
+};
+
 const STYLE = {
   "Documents":      { color: "var(--blue)",   shape: "square" },
   "Disseny":        { color: "var(--red)",    shape: "circle" },
@@ -32,6 +40,8 @@ function chip(label, value) {
   b.setAttribute("aria-pressed", value === "" ? "true" : "false");
   if (value) {
     b.style.setProperty("--dot", STYLE[value].color);
+    b.style.setProperty("--fill", STYLE[value].color);
+    b.style.setProperty("--on-fill", ON[STYLE[value].color]);
     b.classList.add(STYLE[value].shape);
   }
   return b;
