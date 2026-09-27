@@ -10,6 +10,15 @@
   --bar: rgba(255, 255, 255, .72);
   --control: #f0f0f2;
   --control-on: #ffffff;
+  /* Colors de sistema d'Apple, un per categoria. En clar, les variants accessibles (contrast >= 3:1 sobre blanc). */
+  --c-blue: #007aff;
+  --c-pink: #e3264a;
+  --c-indigo: #5856d6;
+  --c-orange: #c93400;
+  --c-green: #248a3d;
+  --c-teal: #008299;
+  --c-purple: #a549d4;
+  --tint: 9%;
   color-scheme: light;
 }
 
@@ -25,6 +34,14 @@
     --focus: #2997ff;
     --bar: rgba(22, 22, 23, .72);
     --control: #1c1c1e;
+    --c-blue: #0a84ff;
+    --c-pink: #ff375f;
+    --c-indigo: #5e5ce6;
+    --c-orange: #ff9f0a;
+    --c-green: #30d158;
+    --c-teal: #40cbe0;
+    --c-purple: #bf5af2;
+    --tint: 16%;
     --control-on: #636366;
     color-scheme: dark;
   }
@@ -40,6 +57,14 @@
   --focus: #2997ff;
   --bar: rgba(22, 22, 23, .72);
   --control: #1c1c1e;
+  --c-blue: #0a84ff;
+  --c-pink: #ff375f;
+  --c-indigo: #5e5ce6;
+  --c-orange: #ff9f0a;
+  --c-green: #30d158;
+  --c-teal: #40cbe0;
+  --c-purple: #bf5af2;
+  --tint: 16%;
   --control-on: #636366;
   color-scheme: dark;
 }
@@ -128,9 +153,9 @@ h1 {
   border-bottom: 2px solid transparent;
   cursor: pointer;
 }
-.cat i { font-size: 30px; color: var(--text); }
+.cat i { font-size: 30px; color: var(--c, var(--text)); }
 .cat:hover { color: var(--text); }
-.cat[aria-pressed="true"] { color: var(--text); border-bottom-color: var(--text); }
+.cat[aria-pressed="true"] { color: var(--text); border-bottom-color: var(--c, var(--text)); }
 
 /* ---------- Barra d'eines ---------- */
 main { max-width: 980px; margin: 0 auto; padding: 32px 22px 80px; }
@@ -153,10 +178,15 @@ main { max-width: 980px; margin: 0 auto; padding: 32px 22px 80px; }
 
 /* ---------- Seccions i fitxes ---------- */
 .section { padding-top: 48px; }
-.section-head { display: flex; align-items: baseline; gap: 12px; margin: 0 0 20px; }
+.section-head { display: flex; align-items: center; gap: 12px; margin: 0 0 20px; }
 .section-head h2 { margin: 0; font-size: 32px; font-weight: 600; letter-spacing: -.01em; }
-.section-head i { font-size: 28px; color: var(--muted); align-self: center; }
-.section-head span { font-size: 17px; color: var(--muted); }
+.section-head i {
+  display: grid; place-items: center;
+  width: 40px; height: 40px; flex: none;
+  font-size: 26px; color: #fff;
+  background: var(--c); border-radius: 10px;
+}
+.section-head span { font-size: 17px; color: var(--muted); align-self: baseline; margin-top: 10px; }
 
 .tiles {
   list-style: none; margin: 0; padding: 0;
@@ -167,11 +197,11 @@ main { max-width: 980px; margin: 0 auto; padding: 32px 22px 80px; }
 .tile {
   display: flex; flex-direction: column;
   padding: 24px;
-  background: var(--band);
+  background: color-mix(in srgb, var(--c) var(--tint), var(--band));
   border-radius: 18px;
 }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tile { background: var(--tile); } }
-:root[data-theme="dark"] .tile { background: var(--tile); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tile { background: color-mix(in srgb, var(--c) var(--tint), var(--tile)); } }
+:root[data-theme="dark"] .tile { background: color-mix(in srgb, var(--c) var(--tint), var(--tile)); }
 
 .tile-type { margin: 0 0 4px; font-size: 12px; font-weight: 600; letter-spacing: 0; color: var(--muted); }
 .tile h3 { margin: 0 0 8px; font-size: 21px; font-weight: 600; line-height: 1.2; letter-spacing: .01em; overflow-wrap: anywhere; }

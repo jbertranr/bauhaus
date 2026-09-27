@@ -9,6 +9,17 @@ const ICON = {
   "Automatització": "ph-gear-six",
 };
 
+// Un color de sistema d'Apple per categoria (els valors, per a clar i fosc, són a apple.css).
+const COLOR = {
+  "Documents":      "var(--c-blue)",
+  "Disseny":        "var(--c-pink)",
+  "Accessibilitat": "var(--c-indigo)",
+  "Codi":           "var(--c-orange)",
+  "Dades":          "var(--c-green)",
+  "Recerca":        "var(--c-teal)",
+  "Automatització": "var(--c-purple)",
+};
+
 const TIPUS = {
   integrada: "Integrada",
   plugin: "Plugin",
@@ -37,6 +48,7 @@ function catButton(label, value, iconName) {
   b.className = "cat";
   b.dataset.cat = value;
   b.setAttribute("aria-pressed", value === "" ? "true" : "false");
+  if (value) b.style.setProperty("--c", COLOR[value]);
   b.append(icon(iconName), label);
   return b;
 }
@@ -135,6 +147,7 @@ function tile(s) {
 function section(cat, list) {
   const sec = document.createElement("section");
   sec.className = "section";
+  sec.style.setProperty("--c", COLOR[cat]);
   const head = document.createElement("header");
   head.className = "section-head";
   const h = document.createElement("h2");
