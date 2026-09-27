@@ -91,7 +91,7 @@ document.getElementById("reset").addEventListener("click", () => {
 });
 
 document.getElementById("lede").textContent =
-  `${SKILLS.length} capacitats que pots afegir a Claude, ordenades per a què serveixen.`;
+  `${SKILLS.length} capacitats que pots afegir a Claude, agrupades per a què serveixen.`;
 
 function matches(s) {
   if (state.cat && s.categoria !== state.cat) return false;
@@ -101,46 +101,56 @@ function matches(s) {
   return hay.includes(state.q);
 }
 
-function joinCa(items) {
-  return items.length < 2 ? items.join("") : items.slice(0, -1).join(", ") + " i " + items.at(-1);
-}
-
 // "D'Anthropic", "De la comunitat", "De Shopify".
 function de(autor) {
   if (autor === "Comunitat") return "De la comunitat";
   return /^[aeiouàèéíòóú]/i.test(autor) ? `D'${autor}` : `De ${autor}`;
 }
 
-function tile(s) {
+// Autor i plugin en una frase; on funciona, només quan no és a tot arreu.
+function meta(s) {
+  const who = de(s.autor);
+  let text = s.plugin ? `Del plugin ${s.plugin}, ${who[0].toLowerCase()}${who.slice(1)}.` : `${who}.`;
+  if (s.on.length === 1) text += ` Només a ${s.on[0]}.`;
+  return text;
+}
+
+function row(s) {
   const li = document.createElement("li");
-  li.className = "tile";
+  li.className = "row";
 
-  const type = document.createElement("p");
-  type.className = "tile-type";
-  type.textContent = s.plugin ? `${TIPUS[s.tipus]} ${s.plugin}` : TIPUS[s.tipus];
+  const inner = s.url
+    ? Object.assign(document.createElement("a"), { href: s.url, target: "_blank", rel: "noopener" })
+    : document.createElement("div");
+  inner.className = "row-inner";
 
+  const main = document.createElement("div");
+  main.className = "row-main";
+
+  const top = document.createElement("div");
+  top.className = "row-top";
   const h = document.createElement("h3");
   h.textContent = s.nom;
+  const type = document.createElement("span");
+  type.className = "row-type";
+  type.textContent = TIPUS[s.tipus];
+  top.append(h, type);
 
   const d = document.createElement("p");
-  d.className = "tile-desc";
+  d.className = "row-desc";
   d.textContent = s.descripcio;
 
   const m = document.createElement("p");
-  m.className = "tile-meta";
-  m.textContent = `${de(s.autor)}. Funciona a ${joinCa(s.on)}.`;
+  m.className = "row-meta";
+  m.textContent = meta(s);
 
-  li.append(type, h, d, m);
-
+  main.append(top, d, m);
+  inner.append(main);
   if (s.url) {
-    const a = document.createElement("a");
-    a.className = "tile-link";
-    a.href = s.url;
-    a.target = "_blank";
-    a.rel = "noopener";
-    a.append("Veure-la a GitHub", icon("ph-caret-right"));
-    li.append(a);
+    inner.setAttribute("aria-label", `${s.nom}, obre el repositori a GitHub`);
+    inner.append(icon("ph-caret-right"));
   }
+  li.append(inner);
   return li;
 }
 
@@ -156,8 +166,8 @@ function section(cat, list) {
   n.textContent = list.length === 1 ? "1 skill" : `${list.length} skills`;
   head.append(icon(ICON[cat]), h, n);
   const ul = document.createElement("ul");
-  ul.className = "tiles";
-  ul.append(...list.map(tile));
+  ul.className = "group";
+  ul.append(...list.map(row));
   sec.append(head, ul);
   return sec;
 }

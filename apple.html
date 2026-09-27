@@ -7,7 +7,7 @@
   <meta name="description" content="Catàleg de skills de Claude, en versió minimalista.">
   <!-- Phosphor Icons 2.1.2, pes light, allotjat al projecte (llicència MIT a vendor/phosphor/LICENSE) -->
   <link rel="stylesheet" href="vendor/phosphor/light.css?v=20260927b">
-  <link rel="stylesheet" href="apple.css?v=20260927c">
+  <link rel="stylesheet" href="apple.css?v=20260927d">
 </head>
 <body>
   <nav class="bar">
@@ -19,7 +19,7 @@
 
   <header class="hero">
     <h1>Skills de Claude.</h1>
-    <p class="lede" id="lede">Capacitats que pots afegir a Claude, ordenades per a què serveixen.</p>
+    <p class="lede" id="lede">Capacitats que pots afegir a Claude, agrupades per a què serveixen.</p>
 
     <label class="search">
       <i class="ph-light ph-magnifying-glass" aria-hidden="true"></i>
@@ -32,6 +32,7 @@
     <div class="cats" id="cats" role="group" aria-label="Categoria"></div>
   </div>
 
+  <div class="list-area">
   <main>
     <div class="toolbar">
       <div class="segmented" id="types" role="group" aria-label="Tipus">
@@ -51,12 +52,13 @@
       <button type="button" id="reset">Treu els filtres</button>
     </div>
   </main>
+  </div>
 
   <footer>
     <p>Per afegir una skill, edita <code>skills.js</code>. Apareixerà en aquesta versió i a la <a href="index.html">versió Bauhaus</a>.</p>
   </footer>
 
   <script src="skills.js?v=20260927b"></script>
-  <script src="apple.js?v=20260927b"></script>
+  <script src="apple.js?v=20260927d"></script>
 </body>
 </html>
