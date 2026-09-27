@@ -41,3 +41,8 @@ A `.claude/skills/` hi ha skills que Claude Code carrega automàticament quan tr
   ```
   node .claude/skills/avoid-ai-design/scripts/detect.mjs index.html styles.css app.js
   ```
+- `ui-ux-pro-max`: de [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) (llicència MIT). Base de dades local d'estils, paletes, tipografies i pautes d'UX, amb un cercador en Python 3 sense dependències:
+
+  ```
+  python3 .claude/skills/ui-ux-pro-max/scripts/search.py "focus visible teclat" --domain ux
+  ```
