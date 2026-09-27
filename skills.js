@@ -1,8 +1,10 @@
 // Catàleg de skills de Claude.
 // Per afegir-ne una, afegeix un objecte a la llista amb els mateixos camps.
-//   tipus:     "integrada" (ve amb Claude) o "plugin" (s'instal·la des del directori)
+//   tipus:     "integrada" (ve amb Claude), "plugin" (s'instal·la des del directori)
+//              o "github" (es copia d'un repositori a la carpeta de skills)
 //   categoria: ha de coincidir amb una de CATEGORIES
 //   on:        on es fa servir ("Claude Code", "claude.ai" o tots dos)
+//   url:       opcional, enllaç a la font
 const CATEGORIES = [
   "Documents",
   "Disseny",
@@ -28,7 +30,14 @@ const SKILLS = [
 
   // --- Disseny ---
   { nom: "frontend-design", categoria: "Disseny", tipus: "plugin", autor: "Anthropic", on: ["Claude Code"],
-    descripcio: "Guia de disseny UI/UX per implementar interfícies web amb una direcció visual clara i acurada." },
+    descripcio: "Evita l'aspecte genèric de «feta amb IA»: obliga a triar una direcció estètica, tipografia amb caràcter i una paleta decidida." },
+  { nom: "avoid-ai-design", categoria: "Disseny", tipus: "github", autor: "funboy322", on: ["Claude Code"],
+    url: "https://github.com/funboy322/avoid-ai-design",
+    descripcio: "Audita una pàgina ja feta i la reescriu perquè deixi de semblar generada: degradats liles, crema amb terracota, etiquetes en majúscules." },
+  { nom: "inhabited-design", categoria: "Disseny", tipus: "plugin", autor: "Comunitat", plugin: "inhabited design", on: ["claude.ai", "Claude Code"],
+    descripcio: "Genera diverses alternatives de tipografia, veu i referències abans de decidir, per no quedar-se amb la primera opció." },
+  { nom: "superdesign", categoria: "Disseny", tipus: "plugin", autor: "Superdesign", plugin: "Superdesign", on: ["Claude Code"],
+    descripcio: "Dissenya o redissenya interfícies, presentacions i gràfics en un llenç infinit amb esborranys ramificables." },
   { nom: "design-critique", categoria: "Disseny", tipus: "plugin", autor: "Anthropic", plugin: "Design", on: ["claude.ai", "Claude Code"],
     descripcio: "Crítica estructurada d'un disseny: jerarquia, consistència, usabilitat i propostes de millora." },
   { nom: "design-system", categoria: "Disseny", tipus: "plugin", autor: "Anthropic", plugin: "Design", on: ["claude.ai", "Claude Code"],

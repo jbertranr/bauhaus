@@ -13,9 +13,8 @@
 <body>
   <header class="hero">
     <div class="hero-text">
-      <p class="kicker">Catàleg</p>
       <h1>Skills<br>de Claude</h1>
-      <p class="lede">Les capacitats que pots afegir a Claude, ordenades per a què serveixen.</p>
+      <p class="lede">Un índex de les capacitats que pots afegir a Claude, ordenades per a què serveixen.</p>
     </div>
     <div class="hero-art" aria-hidden="true">
       <span class="shape circle"></span>
@@ -38,17 +37,18 @@
         <button type="button" class="chip" data-type="" aria-pressed="true">Totes</button>
         <button type="button" class="chip" data-type="integrada" aria-pressed="false">Integrades</button>
         <button type="button" class="chip" data-type="plugin" aria-pressed="false">De plugins</button>
+        <button type="button" class="chip" data-type="github" aria-pressed="false">De GitHub</button>
       </div>
 
       <p class="count" id="count" aria-live="polite"></p>
     </section>
 
-    <section id="grid" class="grid" aria-label="Skills"></section>
+    <div id="index" class="index"></div>
     <p id="empty" class="empty" hidden>Cap skill coincideix amb la cerca.</p>
   </main>
 
   <footer>
-    <p>Per afegir una skill, edita <code>skills.js</code>. Les <strong>integrades</strong> venen amb Claude; les <strong>de plugins</strong> s'instal·len des del directori de plugins.</p>
+    <p>Per afegir una skill, edita <code>skills.js</code>. Les <strong>integrades</strong> venen amb Claude, les <strong>de plugins</strong> s'instal·len des del directori de plugins i les <strong>de GitHub</strong> es copien a la carpeta de skills.</p>
   </footer>
 
   <script src="skills.js"></script>
