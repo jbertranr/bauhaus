@@ -59,3 +59,17 @@ A `.claude/skills/` hi ha skills que Claude Code carrega automàticament quan tr
   pip install playwright
   playwright install chromium
   ```
+
+## Agent dissenyador
+
+`.claude/agents/dissenyador-web.md` és un subagent de Claude Code que genera pàgines web aplicant les skills anteriors sempre en el mateix ordre:
+
+1. Brief (com a màxim 3 preguntes)
+2. `ui-ux-pro-max`: paleta, tipografia i estil
+3. `frontend-design`: direcció visual i construcció
+4. `impeccable` `critique` i `audit`
+5. `avoid-ai-design`: escàner `detect.mjs` i correccions
+6. `webapp-testing`: captures i proves (si alguna falla, torna al pas 4)
+7. `impeccable polish`
+
+Crea sempre fitxers nous (no toca les versions existents), ho allotja tot a `vendor/` i no fa servir res que demani compte o pagament. Per fer-lo servir, obre una sessió nova de Claude Code en aquest repo i demana, per exemple: *"Fes servir el dissenyador-web per crear una pàgina de…"*. També el pots veure i editar amb l'ordre `/agents`.
