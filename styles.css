@@ -220,6 +220,8 @@ footer {
   color: var(--muted);
 }
 footer p { max-width: 62ch; }
+footer .also { margin-top: 12px; }
+footer a { color: var(--ink); font-weight: 700; text-decoration-thickness: 2px; text-underline-offset: 4px; }
 code { font-size: .95em; background: var(--card); padding: 1px 6px; border: 1px solid var(--line); }
 
 /* ---------- Mòbil ---------- */
