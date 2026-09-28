@@ -117,6 +117,17 @@ h1, h2, h3, p { margin: 0; }
 .lede { max-width: 700px; font-size: clamp(18px, 1.8vw, 22px); line-height: 1.45; color: var(--muted); }
 .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 4px; }
 
+/* Figures de la portada: a banda i banda del titular; en pantalles estretes, sota els botons */
+.hero { position: relative; }
+.hero-art { display: block; height: auto; color: var(--ink); }
+.hero-arts .hero-art { position: absolute; top: clamp(64px, 9vw, 104px); width: 210px; }
+.hero-art-left { left: var(--gutter); }
+.hero-art-right { right: var(--gutter); }
+@media (max-width: 1399px) {
+  .hero-arts { display: flex; justify-content: center; gap: 24px; margin-top: 8px; }
+  .hero-arts .hero-art { position: static; width: min(160px, 42vw); }
+}
+
 /* Vista del sistema */
 .mock-wrap { padding: 0 var(--pad-x) var(--zone-y); }
 .mock {
