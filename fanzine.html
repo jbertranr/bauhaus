@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fanzine de Skills</title>
+  <meta name="description" content="Catàleg de skills de Claude en format fanzine, imprès a dues tintes.">
+  <!-- Icones: Phosphor 2.1.2, pes duotone (MIT, vendor/phosphor/LICENSE). Tipografies: Bricolage Grotesque i Atkinson Hyperlegible (OFL, vendor/fonts/). -->
+  <link rel="stylesheet" href="vendor/phosphor/duotone.css?v=20260928a">
+  <link rel="stylesheet" href="fanzine.css?v=20260928a">
+</head>
+<body>
+  <a class="skip" href="#cataleg">Salta al catàleg</a>
+
+  <!-- Recursos compartits per les il·lustracions: trama de punts i gra de paper. -->
+  <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <pattern id="trama" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(22)">
+        <circle cx="3.5" cy="3.5" r="1.7" class="trama-punt"></circle>
+      </pattern>
+      <pattern id="trama-rosa" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-18)">
+        <circle cx="3" cy="3" r="1.5" class="trama-punt-rosa"></circle>
+      </pattern>
+    </defs>
+  </svg>
+
+  <header class="masthead">
+    <div class="masthead-inner">
+      <p class="issue"><span>Fanzine de skills</span> <span>Número 1, tardor de 2026</span></p>
+      <nav class="versions" aria-label="Altres versions">
+        <a href="index.html">Versió Bauhaus</a>
+        <a href="apple.html">Versió minimalista</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="cover">
+    <div class="cover-text">
+      <h1 class="title"><span class="title-ink">Ensenya trucs nous a Claude</span><span class="title-plate" aria-hidden="true">Ensenya trucs nous a Claude</span></h1>
+      <p class="lede" id="lede">Una skill és un paquet d'instruccions que ensenya a Claude a fer una feina concreta. Aquí en tens un recull, triat i explicat.</p>
+      <label class="search">
+        <i class="ph-duotone ph-magnifying-glass" aria-hidden="true"></i>
+        <span class="visually-hidden">Cerca una skill</span>
+        <input id="q" type="search" placeholder="Busca una skill: pdf, disseny, proves…" autocomplete="off" aria-keyshortcuts="/">
+      </label>
+      <p class="hint">Prem <kbd>/</kbd> per buscar des de qualsevol lloc.</p>
+    </div>
+    <div class="stickers" id="stickers" role="group" aria-label="Categories: tria'n una per filtrar"></div>
+  </section>
+
+  <main id="cataleg" tabindex="-1">
+    <div class="filters">
+      <div class="filter-row">
+        <span class="row-label" id="lbl-tema">Tema</span>
+        <div class="stamps" id="cats" role="group" aria-labelledby="lbl-tema"></div>
+      </div>
+      <div class="filter-row">
+        <span class="row-label" id="lbl-origen">Origen</span>
+      <div class="stamps stamps-small" id="types" role="group" aria-labelledby="lbl-origen">
+        <button type="button" data-type="" aria-pressed="true">Totes</button>
+        <button type="button" data-type="integrada" aria-pressed="false"><i class="ph-duotone ph-check-circle" aria-hidden="true"></i>Ja venen amb Claude</button>
+        <button type="button" data-type="plugin" aria-pressed="false"><i class="ph-duotone ph-package" aria-hidden="true"></i>Plugins</button>
+        <button type="button" data-type="github" aria-pressed="false"><i class="ph-duotone ph-github-logo" aria-hidden="true"></i>De GitHub</button>
+      </div>
+      </div>
+      <p class="count" id="count" aria-live="polite"></p>
+    </div>
+
+    <div id="index"></div>
+
+    <div id="empty" class="empty" hidden>
+      <p id="empty-msg"></p>
+      <button type="button" id="reset">Treu els filtres</button>
+    </div>
+  </main>
+
+  <footer class="colophon">
+    <div class="colophon-inner">
+      <h2>Colofó</h2>
+      <p>Imprès a la pantalla amb dues tintes, rosa fluorescent i blau, com una risografia. Il·lustracions dibuixades per a aquest número. Tipografies Bricolage Grotesque i Atkinson Hyperlegible (llicència OFL) i icones Phosphor (llicència MIT).</p>
+      <p>Vols més skills? En trobaràs al directori de plugins de claude.ai i a GitHub. Abans d'instal·lar-ne una, mira'n la llicència i si demana compte o pagament.</p>
+      <p>També pots llegir aquest catàleg a la <a href="index.html">versió Bauhaus</a> o a la <a href="apple.html">versió minimalista</a>.</p>
+    </div>
+  </footer>
+
+  <script src="skills.js?v=20260928a"></script>
+  <script src="fanzine.js?v=20260928a"></script>
+</body>
+</html>

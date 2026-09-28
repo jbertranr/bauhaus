@@ -4,12 +4,13 @@ Pàgina web estàtica d'estil Bauhaus que cataloga skills de Claude, amb cercado
 
 ## Com veure-la
 
-Hi ha dues versions que comparteixen les dades de `skills.js`:
+Hi ha tres versions que comparteixen les dades de `skills.js`:
 
 - `index.html`: versió Bauhaus.
 - `apple.html`: versió minimalista a l'estil d'Apple, amb icones de [Phosphor](https://phosphoricons.com) en pes light (llicència MIT), allotjades a `vendor/phosphor/`.
+- `fanzine.html`: versió fanzine, impresa a dues tintes com una risografia (rosa fluorescent i blau), amb il·lustracions SVG dibuixades per a cada categoria. Tipografies Bricolage Grotesque i Atkinson Hyperlegible (OFL) a `vendor/fonts/` i icones Phosphor duotone (MIT) a `vendor/phosphor/`.
 
-Obre qualsevol dels dos fitxers al navegador. No cal compilar res.
+Obre qualsevol dels fitxers al navegador. No cal compilar res.
 
 Per compartir el catàleg filtrat per una categoria, afegeix-la a l'adreça: `index.html#codi`, `apple.html#disseny`, `#automatitzacio`… (en minúscules i sense accents).
 
@@ -32,6 +33,7 @@ La `categoria` ha de ser una de les de `CATEGORIES`. Per crear-ne una de nova, a
 - `skills.js`: dades del catàleg
 - `app.js`: cerca, filtres i pintat de la versió Bauhaus
 - `apple.css`, `apple.js`: estils i lògica de la versió minimalista
+- `fanzine.css`, `fanzine.js`: estils, lògica i il·lustracions de la versió fanzine
 
 ## Skills del projecte
 

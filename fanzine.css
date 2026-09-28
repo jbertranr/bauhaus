@@ -1,0 +1,314 @@
+/* Fanzine de skills: dues tintes de risografia (rosa fluorescent i blau) sobre paper. */
+
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 700; font-display: swap; src: url("vendor/fonts/bricolage-grotesque-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 800; font-display: swap; src: url("vendor/fonts/bricolage-grotesque-latin-800-normal.woff2") format("woff2"); }
+@font-face { font-family: "Atkinson Hyperlegible"; font-weight: 400; font-display: swap; src: url("vendor/fonts/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Atkinson Hyperlegible"; font-weight: 400; font-style: italic; font-display: swap; src: url("vendor/fonts/atkinson-hyperlegible-latin-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "Atkinson Hyperlegible"; font-weight: 700; font-display: swap; src: url("vendor/fonts/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2"); }
+
+:root {
+  --paper: #f2f2ee;       /* paper de premsa, neutre */
+  --card: #fbfbf8;        /* paper dels adhesius */
+  --ink: #2c4b95;         /* tinta blava: text i línia */
+  --muted: #4e5b7c;       /* tinta blava aigualida per a text secundari */
+  --pink: #ff48b0;        /* rosa fluorescent: planxa de color, mai text petit */
+  --pink-soft: #ffd3ec;
+  --dot: #2c4b95;         /* punts de la trama */
+  --blend: multiply;      /* sobreimpressió de tintes */
+  --shadow: 0 8px 18px rgba(44, 75, 149, .16), 0 1px 2px rgba(44, 75, 149, .18);
+  --display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", system-ui, sans-serif;
+  color-scheme: light;
+}
+
+/* A la foscor, el paper és blau nit i les tintes brillen: es combinen amb «screen». */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #151a2e;
+    --card: #1d2340;
+    --ink: #dfe6ff;
+    --muted: #aeb8dc;
+    --pink: #ff6cc2;
+    --pink-soft: #4a2346;
+    --dot: #8fb0ff;
+    --blend: screen;
+    --shadow: 0 8px 18px rgba(0, 0, 0, .35), 0 1px 2px rgba(0, 0, 0, .4);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #151a2e;
+  --card: #1d2340;
+  --ink: #dfe6ff;
+  --muted: #aeb8dc;
+  --pink: #ff6cc2;
+  --pink-soft: #4a2346;
+  --dot: #8fb0ff;
+  --blend: screen;
+  --shadow: 0 8px 18px rgba(0, 0, 0, .35), 0 1px 2px rgba(0, 0, 0, .4);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-padding-top: 16px; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+/* Gra de paper per sobre de tot, molt subtil. */
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: 30; pointer-events: none;
+  opacity: .14; mix-blend-mode: var(--blend);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .17  0 0 0 0 .29  0 0 0 0 .58  0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+::selection { background: var(--pink-soft); color: var(--ink); }
+input { caret-color: var(--pink); }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+a { color: var(--ink); text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-color: var(--pink); }
+a:hover { text-decoration-thickness: 4px; }
+
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.defs { position: absolute; }
+.skip {
+  position: absolute; left: 16px; top: -100px; z-index: 40;
+  padding: 10px 18px; border-radius: 8px;
+  font-weight: 700; color: var(--paper); background: var(--ink);
+}
+.skip:focus { top: 12px; }
+main:focus { outline: none; }
+
+/* ---------- Icones duotone com a dues planxes ---------- */
+.ph-duotone::before { color: var(--pink); opacity: .95 !important; }
+.ph-duotone::after { color: var(--ink); mix-blend-mode: var(--blend); }
+
+/* ---------- Il·lustracions ---------- */
+.trama-punt { fill: var(--dot); }
+.trama-punt-rosa { fill: var(--pink); }
+.art { display: block; overflow: visible; }
+.art .rosa > * { fill: var(--pink); mix-blend-mode: var(--blend); }
+.art .trama > * { fill: url(#trama); }
+.art .blau > * { fill: none; stroke: var(--ink); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; mix-blend-mode: var(--blend); }
+.art .blau > .ple { fill: var(--ink); }
+/* Mal registre de la planxa rosa, com a la risografia. */
+.art .rosa { transform: translate(4px, -3px); }
+
+/* ---------- Capçalera de la revista ---------- */
+.masthead { border-bottom: 3px solid var(--ink); }
+.masthead-inner {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 24px;
+  max-width: 1180px; margin: 0 auto; padding: 14px 24px;
+}
+.issue { margin: 0; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 16px; }
+.issue span:first-child { font-family: var(--display); font-weight: 800; font-size: 20px; }
+.issue span:last-child { color: var(--muted); align-self: center; }
+.versions { display: flex; gap: 20px; font-size: 16px; }
+.versions a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* ---------- Portada ---------- */
+.cover {
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 56px; align-items: center;
+  max-width: 1180px; margin: 0 auto; padding: 64px 24px 56px;
+}
+.title {
+  position: relative; isolation: isolate;
+  margin: 0;
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(44px, 6.2vw, 92px); line-height: .96; letter-spacing: -.03em;
+  text-wrap: balance;
+}
+.title-ink { position: relative; z-index: 1; mix-blend-mode: var(--blend); }
+.title-plate {
+  position: absolute; inset: 0; z-index: 0;
+  color: var(--pink);
+  transform: translate(.05em, .045em);
+}
+.lede { max-width: 46ch; margin: 22px 0 28px; font-size: 21px; line-height: 1.5; color: var(--muted); }
+.search { position: relative; display: block; max-width: 560px; }
+.search i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 30px; }
+.search input {
+  width: 100%;
+  padding: 16px 18px 16px 60px;
+  font: inherit; font-size: 20px; color: var(--ink);
+  background: var(--card);
+  border: 3px solid var(--ink); border-radius: 14px;
+  box-shadow: var(--shadow);
+  outline: none;
+}
+.search input::placeholder { color: var(--muted); opacity: 1; }
+.search input:focus-visible { box-shadow: 0 0 0 5px var(--pink-soft), var(--shadow); }
+.hint { margin: 12px 0 0; font-size: 15px; color: var(--muted); }
+kbd {
+  display: inline-block; min-width: 1.6em; padding: 0 6px;
+  font: 700 14px/1.6 var(--body); text-align: center;
+  border: 2px solid var(--ink); border-bottom-width: 3px; border-radius: 6px;
+}
+
+/* Adhesius de categories */
+/* 8 columnes: cada adhesiu n'ocupa 2; la segona fila (3 adhesius) queda centrada. */
+.stickers { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 18px 16px; }
+.sticker { grid-column: span 2; }
+.sticker:nth-child(5) { grid-column: 2 / span 2; }
+.sticker {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 12px 10px 12px;
+  font: inherit; color: var(--ink);
+  background: var(--card);
+  border: 0; border-radius: 22px;
+  box-shadow: var(--shadow);
+  transform: rotate(var(--tilt));
+  transition: transform .25s cubic-bezier(.16, 1, .3, 1), opacity .2s ease;
+  cursor: pointer;
+}
+.sticker .art { width: 100%; max-width: 120px; aspect-ratio: 1; }
+.sticker-label { display: flex; flex-direction: column; align-items: center; max-width: 100%; font-family: var(--display); font-weight: 700; font-size: 14px; line-height: 1.15; letter-spacing: -.01em; text-align: center; white-space: nowrap; }
+.sticker-label b { font-weight: 800; color: var(--muted); font-size: 14px; }
+.sticker:hover { transform: rotate(0deg) scale(1.04); }
+.sticker[aria-pressed="true"] { transform: rotate(0deg); outline: 3px solid var(--ink); outline-offset: 3px; }
+.stickers.filtered .sticker:not([aria-pressed="true"]) { opacity: .45; }
+
+/* L'únic moment de moviment: en carregar, la planxa rosa entra en registre. */
+@media (prefers-reduced-motion: no-preference) {
+  .cover .art .rosa { animation: registre .9s cubic-bezier(.16, 1, .3, 1) both; }
+  .cover .sticker:nth-child(2) .rosa { animation-delay: .05s; }
+  .cover .sticker:nth-child(3) .rosa { animation-delay: .1s; }
+  .cover .sticker:nth-child(4) .rosa { animation-delay: .15s; }
+  .cover .sticker:nth-child(5) .rosa { animation-delay: .2s; }
+  .cover .sticker:nth-child(6) .rosa { animation-delay: .25s; }
+  .cover .sticker:nth-child(7) .rosa { animation-delay: .3s; }
+  .title-plate { animation: registre-titol .9s cubic-bezier(.16, 1, .3, 1) both; }
+}
+@keyframes registre { from { transform: translate(16px, -12px); } to { transform: translate(4px, -3px); } }
+@keyframes registre-titol { from { transform: translate(.22em, -.12em); } to { transform: translate(.05em, .045em); } }
+
+/* ---------- Filtres ---------- */
+main { max-width: 1180px; margin: 0 auto; padding: 8px 24px 80px; }
+.filters {
+  display: grid; gap: 14px;
+  padding: 24px 0 28px;
+  border-top: 3px solid var(--ink);
+}
+.filter-row { display: grid; grid-template-columns: 76px minmax(0, 1fr); align-items: center; gap: 12px; }
+.row-label { font-family: var(--display); font-weight: 800; font-size: 18px; }
+.stamps { display: flex; flex-wrap: wrap; gap: 10px; }
+.stamps button {
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 44px; padding: 6px 14px;
+  font: 700 16px/1.2 var(--body); color: var(--ink);
+  background: transparent;
+  border: 2px solid var(--ink); border-radius: 8px;
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease;
+}
+.stamps button i { font-size: 22px; }
+.stamps button:hover { background: var(--pink-soft); }
+.stamps button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.stamps button[aria-pressed="true"] .ph-duotone::after { color: var(--paper); mix-blend-mode: normal; }
+.stamps-small button { font-size: 15px; min-height: 40px; }
+@media (pointer: coarse) { .stamps-small button { min-height: 44px; } }
+.count { margin: 0; font-size: 16px; color: var(--muted); }
+
+/* ---------- Catàleg: una doble pàgina per categoria ---------- */
+.spread {
+  display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 56px;
+  padding: 48px 0 40px;
+  /* Filet de trama rosa entre seccions. */
+  background: radial-gradient(circle, var(--pink) 2px, transparent 2.4px) 0 0 / 11px 8px repeat-x;
+}
+.plate { position: sticky; top: 24px; align-self: start; }
+.art-plate { width: 200px; height: 200px; margin: 0 0 12px -12px; }
+.plate h2 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 44px; line-height: 1; letter-spacing: -.02em; }
+.plate-count { margin: 6px 0 12px; font-weight: 700; color: var(--muted); }
+.plate-about { margin: 0; max-width: 32ch; font-size: 17px; color: var(--muted); }
+
+.entries { list-style: none; margin: 0; padding: 0; }
+.entry + .entry { background: radial-gradient(circle, var(--ink) 1.2px, transparent 1.5px) 0 0 / 9px 4px repeat-x; }
+.entry summary {
+  display: grid; gap: 6px;
+  padding: 22px 0 20px;
+  list-style: none; cursor: pointer;
+}
+.entry summary::-webkit-details-marker { display: none; }
+.entry-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.entry-name { font-family: var(--display); font-weight: 700; font-size: 26px; line-height: 1.15; letter-spacing: -.01em; overflow-wrap: anywhere; }
+.entry-desc { max-width: 62ch; font-size: 18px; }
+.entry-by { font-size: 15px; color: var(--muted); }
+.entry-toggle { display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; font-weight: 700; font-size: 15px; text-decoration: underline; text-decoration-color: var(--pink); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.entry-toggle i { font-size: 20px; transition: transform .2s cubic-bezier(.16, 1, .3, 1); }
+details[open] .entry-toggle i { transform: rotate(180deg); }
+.entry summary:hover .entry-name { text-decoration: underline; text-decoration-color: var(--pink); text-decoration-thickness: 3px; text-underline-offset: 5px; }
+
+/* Segell del tipus, estampat a mà. */
+.kind {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 2px 10px 2px 6px;
+  font-size: 14px; font-weight: 700;
+  border: 2px solid var(--ink); border-radius: 6px;
+  transform: rotate(-1.5deg);
+}
+.kind i { font-size: 20px; }
+
+.entry-how { padding: 0 0 22px; max-width: 64ch; font-size: 17px; }
+.entry-how p { margin: 0 0 8px; }
+.entry-how a { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; }
+code {
+  font: 600 .88em/1 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  padding: 3px 7px; border-radius: 6px;
+  background: var(--pink-soft);
+}
+
+.empty { padding: 56px 0; max-width: 60ch; }
+.empty p { margin: 0 0 16px; font-size: 21px; }
+.empty button {
+  min-height: 44px; padding: 8px 18px;
+  font: 700 16px/1 var(--body); color: var(--paper); background: var(--ink);
+  border: 0; border-radius: 8px; cursor: pointer;
+}
+
+/* ---------- Colofó ---------- */
+.colophon {
+  background: radial-gradient(circle, var(--pink) 2px, transparent 2.4px) 0 0 / 11px 8px repeat-x, var(--card);
+  border-top: 3px solid var(--ink);
+}
+.colophon-inner { max-width: 1180px; margin: 0 auto; padding: 40px 24px 56px; }
+.colophon h2 { margin: 0 0 12px; font-family: var(--display); font-weight: 800; font-size: 28px; }
+.colophon p { max-width: 68ch; margin: 0 0 10px; font-size: 16px; color: var(--muted); }
+
+/* Pantalles mitjanes: tres adhesius per fila perquè els noms llargs hi càpiguen. */
+@media (min-width: 861px) and (max-width: 1180px) {
+  .stickers { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .sticker:nth-child(5) { grid-column: auto / span 2; }
+  .sticker:nth-child(7) { grid-column: 3 / span 2; }
+}
+
+/* ---------- Mòbil ---------- */
+@media (max-width: 860px) {
+  .cover { grid-template-columns: 1fr; gap: 36px; padding: 36px 16px 40px; }
+  /* En mòbil, els adhesius són una tira que es desplaça, per no tapar el catàleg. */
+  .stickers {
+    display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
+    margin: 0 -16px; padding: 10px 16px 16px; scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+  }
+  .stickers::-webkit-scrollbar { display: none; }
+  .sticker { flex: none; width: 128px; scroll-snap-align: start; padding: 8px 6px 10px; border-radius: 16px; }
+  .filter-row { grid-template-columns: 1fr; gap: 6px; }
+  .masthead-inner, main, .colophon-inner { padding-left: 16px; padding-right: 16px; }
+  .spread { grid-template-columns: 1fr; gap: 8px; padding-top: 36px; }
+  .plate { position: static; display: grid; grid-template-columns: 96px 1fr; column-gap: 16px; align-items: center; }
+  .art-plate { width: 96px; height: 96px; margin: 0; grid-row: span 3; }
+  .plate h2 { font-size: 32px; }
+  .plate-count { margin: 2px 0 4px; }
+  .plate-about { grid-column: 1 / -1; margin-top: 12px; max-width: none; }
+  .entry-name { font-size: 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticker, .stamps button, .entry-toggle i { transition: none; }
+}
