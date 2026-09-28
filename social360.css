@@ -121,8 +121,9 @@ h1, h2, h3, p { margin: 0; }
 .hero { position: relative; }
 .hero-art { display: block; height: auto; color: var(--ink); }
 .hero-arts .hero-art { position: absolute; top: clamp(64px, 9vw, 104px); width: 210px; }
-.hero-art-left { left: var(--gutter); }
-.hero-art-right { right: var(--gutter); }
+/* Col·locades des del centre (mig titular + 40 px + amplada de la figura) perquè no s'allunyin en pantalles grans */
+.hero-art-left { left: calc(50% - 655px); }
+.hero-art-right { right: calc(50% - 655px); }
 @media (max-width: 1399px) {
   .hero-arts { display: flex; justify-content: center; gap: 24px; margin-top: 8px; }
   .hero-arts .hero-art { position: static; width: min(160px, 42vw); }
