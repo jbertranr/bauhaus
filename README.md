@@ -48,3 +48,10 @@ A `.claude/skills/` hi ha skills que Claude Code carrega automàticament quan tr
   ```
   python3 .claude/skills/ui-ux-pro-max/scripts/search.py "focus visible teclat" --domain ux
   ```
+- `impeccable`: de [pbakaus/impeccable](https://github.com/pbakaus/impeccable) (Apache 2.0). Disseny en fases: `critique`, `audit`, `polish`, `harden`, `typeset`, `colorize`… Invoca-la amb `/impeccable <ordre>`. El primer cop baixa el seu motor des de les versions de GitHub del projecte (a `~/.impeccable/`), comprovant-ne la signatura; si no pot, funciona igualment llegint només les referències.
+- `webapp-testing`: de [anthropics/skills](https://github.com/anthropics/skills) (Apache 2.0). Proves automàtiques amb Playwright per a Python. Cal instal·lar-lo una vegada a la màquina:
+
+  ```
+  pip install playwright
+  playwright install chromium
+  ```
