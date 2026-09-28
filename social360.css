@@ -158,6 +158,8 @@ h1, h2, h3, p { margin: 0; }
 .award-art { width: 100%; max-width: 360px; }
 .funds-art { flex: 0 1 340px; width: 100%; max-width: 340px; }
 
+.more { margin: 0; }
+
 /* Proximitat */
 .band {
   display: flex; align-items: center; gap: 80px;
