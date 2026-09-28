@@ -23,6 +23,7 @@
   --faint: #615d59;
   --line: #ecebe9;
   --line-2: #e3e2e0;
+  --divider: #cfccc6;
   --paper: #ffffff;
   --panel: #f6f5f4;
   --side: #f7f6f3;
@@ -37,7 +38,9 @@
   --red-bg: #fdf0f0;
   --radius: 16px;
   --gutter: clamp(16px, 4.5vw, 64px);
-  --inner: min(1120px, 100% - 2 * var(--gutter));
+  /* Marge lateral que alinea el contingut a una columna de 1120 px; les zones ocupen tota l'amplada */
+  --pad-x: max(var(--gutter), (100% - 1120px) / 2);
+  --zone-y: clamp(72px, 8vw, 112px);
   --sans: "Geist", system-ui, sans-serif;
   --serif: "Newsreader", Georgia, serif;
 }
@@ -97,8 +100,11 @@ h1, h2, h3, p { margin: 0; }
 /* Portada */
 .hero {
   display: flex; flex-direction: column; align-items: center; gap: 28px;
-  padding: clamp(64px, 9vw, 104px) var(--gutter) 72px; text-align: center;
+  padding: clamp(64px, 9vw, 104px) var(--pad-x) 72px; text-align: center;
 }
+
+/* Cada zona de la presentació va separada per una línia de vora a vora */
+.zone { border-top: 1px solid var(--divider); padding: var(--zone-y) var(--pad-x); }
 .pill {
   display: inline-flex; align-items: center; gap: 8px; min-height: 32px; padding: 4px 14px;
   border-radius: 999px; background: var(--blue-bg); color: var(--blue-ink);
@@ -112,7 +118,7 @@ h1, h2, h3, p { margin: 0; }
 .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 4px; }
 
 /* Vista del sistema */
-.mock-wrap { width: var(--inner); margin: 0 auto 120px; }
+.mock-wrap { padding: 0 var(--pad-x) var(--zone-y); }
 .mock {
   border: 1px solid var(--line-2); border-radius: var(--radius); overflow: hidden; background: var(--paper);
   box-shadow: 0 1px 2px rgba(15, 15, 15, 0.04), 0 18px 48px rgba(15, 15, 15, 0.08);
@@ -144,7 +150,7 @@ h1, h2, h3, p { margin: 0; }
 .lines span:nth-child(1) { width: 92%; } .lines span:nth-child(2) { width: 78%; } .lines span:nth-child(3) { width: 64%; }
 
 /* Seccions */
-.section { width: var(--inner); margin: 0 auto 128px; display: flex; flex-direction: column; gap: 48px; }
+.section { display: flex; flex-direction: column; gap: 48px; }
 .section-head { display: flex; flex-direction: column; gap: 16px; max-width: 760px; }
 .section h2 { font-size: clamp(38px, 5vw, 56px); line-height: 1.05; font-weight: 700; letter-spacing: -0.04em; }
 .section-head p { font-size: 20px; color: var(--muted); }
@@ -163,8 +169,7 @@ h1, h2, h3, p { margin: 0; }
 /* Proximitat */
 .band {
   display: flex; align-items: center; gap: 80px;
-  margin: 0 var(--gutter); padding: clamp(40px, 6.5vw, 96px);
-  border-radius: 24px; background: var(--panel);
+  background: var(--panel);
 }
 .band-text { flex: 1; display: flex; flex-direction: column; gap: 20px; }
 .band h2 { font-size: clamp(36px, 4.5vw, 52px); line-height: 1.06; font-weight: 700; letter-spacing: -0.04em; }
@@ -180,7 +185,6 @@ h1, h2, h3, p { margin: 0; }
 
 /* Reconeixement */
 .award {
-  width: var(--inner); margin: 0 auto; padding: 128px 0;
   display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center;
 }
 .award .quote {
@@ -196,7 +200,7 @@ h1, h2, h3, p { margin: 0; }
 .fund-name { font-size: 20px; font-weight: 600; line-height: 1.3; letter-spacing: -0.015em; }
 
 /* Peu */
-.foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding: 40px var(--gutter); border-top: 1px solid var(--line); font-size: 14px; color: var(--faint); }
+.foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding: 40px var(--pad-x); border-top: 1px solid var(--divider); font-size: 14px; color: var(--faint); }
 .foot-brand { font-size: 16px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; }
 .foot-text { flex: 1; min-width: 240px; }
 
@@ -212,12 +216,16 @@ h1, h2, h3, p { margin: 0; }
   .nav-links { display: none; }
   .brand { flex: 1; }
   .mock-side { display: none; }
-  .mock-doc { padding: 32px 24px; }
   .mock-body { min-height: 0; }
-  .tiles { grid-template-columns: minmax(0, 1fr); }
-  .tile { min-height: 0; }
-  .mock-wrap, .section { margin-bottom: 88px; }
-  .award { padding: 88px 0; }
+  /* Les caixes que ocuparien gairebé tota l'amplada van de vora a vora, sense marge ni cantonades */
+  .mock-wrap { padding-bottom: 0; }
+  .mock { margin-inline: calc(-1 * var(--gutter)); border-radius: 0; border-inline: 0; border-bottom: 0; box-shadow: none; }
+  #ambits { padding-bottom: 0; }
+  .mock-doc { padding: 32px var(--gutter); }
+  .tiles { grid-template-columns: minmax(0, 1fr); gap: 0; margin-inline: calc(-1 * var(--gutter)); }
+  .tile { min-height: 0; border-radius: 0; padding: 40px var(--gutter); }
+  .funds { gap: 0; }
+  .fund { padding: 20px 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; }
 }
 @media (max-width: 480px) {
   .props { grid-template-columns: minmax(0, 1fr); row-gap: 4px; }
