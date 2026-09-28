@@ -44,7 +44,7 @@
     --c-teal: #40cbe0;
     --c-purple: #bf5af2;
     --soft: 24%;
-    --icon-mix: 80%;
+    --icon-mix: 62%;
     --control-on: #636366;
     --placeholder: #a1a1a6;
     color-scheme: dark;
@@ -69,7 +69,7 @@
   --c-teal: #40cbe0;
   --c-purple: #bf5af2;
   --soft: 24%;
-  --icon-mix: 80%;
+  --icon-mix: 62%;
   --control-on: #636366;
   --placeholder: #a1a1a6;
   color-scheme: dark;
@@ -91,6 +91,11 @@ body {
 a { color: var(--link); text-decoration: none; }
 a:hover { text-decoration: underline; }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* Superfícies del navegador amb la paleta: selecció, cursor i controls. */
+::selection { background: color-mix(in srgb, var(--focus) 28%, transparent); }
+input { caret-color: var(--focus); }
+:root { accent-color: var(--focus); }
 
 /* La barra superior és fixa: que no tapi l'element amb el focus en desplaçar-se. */
 html { scroll-padding-top: 68px; }
@@ -119,23 +124,24 @@ main:focus { outline: none; }
 }
 .bar-inner {
   display: flex; justify-content: space-between; align-items: center;
-  max-width: 980px; height: 52px; margin: 0 auto; padding: 0 22px;
+  max-width: 760px; height: 52px; margin: 0 auto; padding: 0 22px;
 }
 .bar-title { font-size: 21px; font-weight: 600; }
 /* Àrea clicable de 44 px d'alt sense canviar com es veu. */
 .bar-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; font-size: 14px; }
 
 /* ---------- Capçalera ---------- */
-.hero { max-width: 980px; margin: 0 auto; padding: 88px 22px 40px; text-align: center; }
+.hero { max-width: 760px; margin: 0 auto; padding: 56px 22px 28px; text-align: center; }
 h1 {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: clamp(48px, 8vw, 80px);
+  font-size: clamp(36px, 5vw, 48px);
   font-weight: 700;
-  line-height: 1.05;
+  line-height: 1.1;
+  text-wrap: balance;
   letter-spacing: -.015em;
 }
-.lede { max-width: 30ch; margin: 16px auto 40px; font-size: clamp(21px, 2.6vw, 28px); line-height: 1.25; color: var(--muted); }
+.lede { max-width: 60ch; margin: 10px auto 24px; font-size: 19px; line-height: 1.4; color: var(--muted); text-wrap: balance; }
 
 .search {
   position: relative; display: block;
@@ -182,7 +188,7 @@ h1 {
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .list-area { background: var(--bg); } }
 :root[data-theme="dark"] .list-area { background: var(--bg); }
 
-main { max-width: 760px; margin: 0 auto; padding: 32px 22px 80px; }
+main { max-width: 760px; margin: 0 auto; padding: 20px 22px 80px; }
 .toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
 
 .segmented {
@@ -207,7 +213,7 @@ main { max-width: 760px; margin: 0 auto; padding: 32px 22px 80px; }
 .section-head i {
   display: grid; place-items: center;
   width: 36px; height: 36px; flex: none;
-  font-size: 24px; color: var(--c);
+  font-size: 24px; color: color-mix(in srgb, var(--c) var(--icon-mix), var(--muted));
   background: color-mix(in srgb, var(--c) var(--soft), var(--bg)); border-radius: 9px;
 }
 .section-head span { font-size: 17px; color: var(--muted); margin-top: 4px; }
@@ -225,16 +231,27 @@ main { max-width: 760px; margin: 0 auto; padding: 32px 22px 80px; }
   content: ""; position: absolute; top: 0; left: 20px; right: 0;
   border-top: 1px solid color-mix(in srgb, var(--hairline) 70%, transparent);
 }
-.row-inner { display: flex; align-items: center; gap: 12px; padding: 14px 16px 14px 20px; color: inherit; }
-a.row-inner:hover { text-decoration: none; background: color-mix(in srgb, var(--text) 4%, transparent); }
-a.row-inner:focus-visible { outline-offset: -2px; }
-.row-main { flex: 1; min-width: 0; }
+.row-inner { display: flex; align-items: center; gap: 12px; padding: 14px 16px 14px 20px; cursor: pointer; list-style: none; }
+.row-inner::-webkit-details-marker { display: none; }
+.row-inner:hover { background: color-mix(in srgb, var(--text) 4%, transparent); }
+.row-inner:focus-visible { outline-offset: -2px; }
+.row-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .row-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-.row h3 { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.3; letter-spacing: -.01em; overflow-wrap: anywhere; }
+.row-name { font-size: 17px; font-weight: 600; line-height: 1.3; letter-spacing: -.01em; overflow-wrap: anywhere; }
 .row-type { flex: none; font-size: 15px; color: var(--muted); }
-.row-desc { margin: 2px 0 0; font-size: 15px; line-height: 1.4; color: var(--text); }
-.row-meta { margin: 4px 0 0; font-size: 13px; color: var(--muted); letter-spacing: -.005em; }
-.row-inner > i { flex: none; font-size: 18px; color: var(--muted); }
+.row-desc { margin-top: 2px; font-size: 15px; line-height: 1.4; }
+.row-meta { margin-top: 4px; font-size: 13px; color: var(--muted); letter-spacing: -.005em; }
+.row-inner > i { flex: none; font-size: 18px; color: var(--muted); transition: transform .2s cubic-bezier(.2, .8, .2, 1); }
+details[open] > .row-inner > i { transform: rotate(90deg); }
+.row-more { padding: 0 20px 16px; font-size: 15px; line-height: 1.45; }
+.row-more p { margin: 0 0 6px; max-width: 65ch; }
+.row-more p:last-child { margin-bottom: 0; }
+code {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .9em;
+  padding: 1px 6px; background: var(--control); border-radius: 6px;
+}
+.types-help { margin: 10px 0 0; max-width: 70ch; font-size: 14px; line-height: 1.45; color: var(--muted); }
+.types-help strong { color: var(--text); font-weight: 600; }
 
 /* ---------- Estat buit ---------- */
 .empty { padding: 72px 0; text-align: center; color: var(--muted); }
@@ -243,19 +260,18 @@ a.row-inner:focus-visible { outline-offset: -2px; }
 .empty button {
   padding: 10px 20px;
   font: inherit; font-size: 15px;
-  color: #fff; background: var(--focus);
+  color: var(--bg); background: var(--text);
   border: 0; border-radius: 980px;
   cursor: pointer;
 }
 
 footer { border-top: 1px solid var(--hairline); background: var(--band); }
-footer p { max-width: 980px; margin: 0 auto; padding: 20px 22px; font-size: 12px; color: var(--muted); letter-spacing: 0; }
-code { font-size: 12px; }
+footer p { max-width: 760px; margin: 0 auto; padding: 20px 22px; font-size: 12px; color: var(--muted); letter-spacing: 0; }
 
 /* ---------- Mòbil ---------- */
 @media (max-width: 734px) {
   .bar-inner, .hero, main { padding-left: 16px; padding-right: 16px; }
-  .hero { padding-top: 56px; }
+  .hero { padding-top: 32px; }
   .cats { justify-content: flex-start; padding: 8px 16px 0; }
   .cat { min-width: 84px; }
   .section-head h2 { font-size: 24px; }
@@ -265,6 +281,7 @@ code { font-size: 12px; }
     mask-image: linear-gradient(to right, #000 calc(100% - 48px), transparent);
   }
   .row-inner { padding-left: 16px; }
+  .row-more { padding: 0 16px 16px; }
   .row + .row::before { left: 16px; }
   .segmented { width: 100%; }
   .segmented button { flex: 1; min-height: 44px; padding: 6px 4px; }
@@ -276,4 +293,8 @@ code { font-size: 12px; }
 /* Pantalles tàctils grans (tauletes): el mateix mínim de 44 px. */
 @media (pointer: coarse) {
   .segmented button { min-height: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row-inner > i { transition: none; }
 }

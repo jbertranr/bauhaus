@@ -100,8 +100,16 @@ $types.addEventListener("click", e => {
   render();
 });
 
+// Drecera de teclat: «/» porta a la cerca (fora dels camps de text).
+addEventListener("keydown", e => {
+  if (e.key !== "/" || e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.target.closest("input, textarea, [contenteditable]")) return;
+  e.preventDefault();
+  $q.focus();
+});
+
 $q.addEventListener("input", () => {
-  state.q = $q.value.trim().toLowerCase();
+  state.q = norm($q.value.trim());
   render();
 });
 
@@ -114,13 +122,18 @@ document.getElementById("reset").addEventListener("click", () => {
 });
 
 document.getElementById("lede").textContent =
-  `${SKILLS.length} capacitats que pots afegir a Claude, agrupades per a què serveixen.`;
+  `${SKILLS.length} skills que ensenyen a Claude a fer tasques concretes.`;
+
+// Cerca sense accents ni majúscules: «automatitzacio» troba «Automatització».
+function norm(t) {
+  return t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
 
 function matches(s) {
   if (state.cat && s.categoria !== state.cat) return false;
   if (state.type && s.tipus !== state.type) return false;
   if (!state.q) return true;
-  const hay = [s.nom, s.descripcio, s.plugin, s.autor, s.categoria].join(" ").toLowerCase();
+  const hay = norm([s.nom, s.descripcio, s.plugin, s.autor, s.categoria, TIPUS[s.tipus], ...s.on].join(" "));
   return hay.includes(state.q);
 }
 
@@ -138,45 +151,76 @@ function meta(s) {
   return text;
 }
 
+function joinCa(items) {
+  return items.length < 2 ? items.join("") : items.slice(0, -1).join(", ") + " i " + items.at(-1);
+}
+
+function code(text) {
+  const c = document.createElement("code");
+  c.textContent = text;
+  return c;
+}
+
+// Com s'obté cada skill, segons el tipus. Només es dona l'ordre /nom quan és segur que funciona així.
+function howTo(s) {
+  const p = document.createElement("p");
+  if (s.tipus === "integrada") {
+    p.append("Ja ve amb Claude: no cal instal·lar-la. Claude la fa servir sola quan la tasca ho demana.");
+    if (s.on.length === 1 && s.on[0] === "Claude Code") p.append(" També la pots cridar escrivint ", code(`/${s.nom}`), ".");
+  } else if (s.tipus === "plugin") {
+    p.append(`S'obté instal·lant el plugin «${s.plugin || s.nom}» des del directori de plugins de claude.ai o, a Claude Code, amb l'ordre `, code("/plugin"), ".");
+  } else {
+    p.append("Copia la seva carpeta a ", code(".claude/skills/"), " del teu projecte i Claude Code la carregarà sola. Després la pots cridar escrivint ", code(`/${s.nom}`), ".");
+  }
+  return p;
+}
+
 function row(s) {
   const li = document.createElement("li");
   li.className = "row";
-
-  const inner = s.url
-    ? Object.assign(document.createElement("a"), { href: s.url, target: "_blank", rel: "noopener" })
-    : document.createElement("div");
-  inner.className = "row-inner";
+  const details = document.createElement("details");
+  const summary = document.createElement("summary");
+  summary.className = "row-inner";
 
   const main = document.createElement("div");
   main.className = "row-main";
-
   const top = document.createElement("div");
   top.className = "row-top";
-  const h = document.createElement("h3");
-  h.textContent = s.nom;
+  const name = document.createElement("strong");
+  name.className = "row-name";
+  name.textContent = s.nom;
   const type = document.createElement("span");
   type.className = "row-type";
   type.textContent = TIPUS[s.tipus];
-  top.append(h, type);
-
-  const d = document.createElement("p");
+  top.append(name, type);
+  const d = document.createElement("span");
   d.className = "row-desc";
   d.textContent = s.descripcio;
-
-  const m = document.createElement("p");
+  const m = document.createElement("span");
   m.className = "row-meta";
   m.textContent = meta(s);
-
   main.append(top, d, m);
-  inner.append(main);
+  summary.append(main, icon("ph-caret-right"));
+
+  const more = document.createElement("div");
+  more.className = "row-more";
+  more.append(howTo(s));
+  const where = document.createElement("p");
+  where.textContent = `Funciona a ${joinCa(s.on)}.`;
+  more.append(where);
   if (s.url) {
+    const a = Object.assign(document.createElement("a"), { href: s.url, target: "_blank", rel: "noopener" });
+    a.append("Veure el repositori a GitHub");
     const note = document.createElement("span");
     note.className = "visually-hidden";
-    note.textContent = "Obre el repositori a GitHub en una pestanya nova.";
-    main.append(note);
-    inner.append(icon("ph-caret-right"));
+    note.textContent = " (s'obre en una pestanya nova)";
+    a.append(note);
+    const pa = document.createElement("p");
+    pa.append(a);
+    more.append(pa);
   }
-  li.append(inner);
+  details.append(summary, more);
+  li.append(details);
   return li;
 }
 
