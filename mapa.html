@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mapa de Skills</title>
+  <meta name="description" content="Les skills de Claude com un mapa de metro: cada línia és un tema i cada parada, una skill.">
+  <!-- Icones: Phosphor 2.1.2, pes light (MIT, vendor/phosphor/LICENSE). Tipografia: Atkinson Hyperlegible (OFL, vendor/fonts/). -->
+  <link rel="stylesheet" href="vendor/phosphor/light.css?v=20260928b">
+  <link rel="stylesheet" href="mapa.css?v=20260928b">
+</head>
+<body>
+  <a class="skip" href="#consola">Salta a la consola</a>
+
+  <header class="top">
+    <div class="top-text">
+      <h1>El mapa de les skills de Claude</h1>
+      <p class="lede" id="lede">Cada línia és un tema i cada parada, una skill. Toca una parada per saber com s'hi arriba.</p>
+    </div>
+    <nav class="lines" id="lines" aria-label="Línies"></nav>
+  </header>
+
+  <section class="map-wrap" aria-label="Mapa">
+    <p class="map-hint" id="map-hint">Arrossega el mapa per veure'l sencer.</p>
+    <div class="map-scroll">
+      <svg id="map" viewBox="0 0 1240 720" role="group" aria-label="Mapa de skills. Cada parada obre la skill a la consola."></svg>
+    </div>
+  </section>
+
+  <section class="console" id="consola" tabindex="-1" aria-labelledby="console-title">
+    <div class="console-head">
+      <h2 id="console-title">Busca i obre una skill</h2>
+      <div class="types" id="types" role="group" aria-label="Com s'obté">
+        <button type="button" data-type="" aria-pressed="true">Totes</button>
+        <button type="button" data-type="integrada" aria-pressed="false">Ve amb Claude</button>
+        <button type="button" data-type="plugin" aria-pressed="false">Plugins</button>
+        <button type="button" data-type="github" aria-pressed="false">GitHub</button>
+      </div>
+    </div>
+
+    <div class="palette">
+      <div class="input">
+        <span class="slash" aria-hidden="true">/</span>
+        <label class="visually-hidden" for="q">Busca una skill</label>
+        <input id="q" type="search" role="combobox" aria-expanded="true" aria-controls="results" aria-autocomplete="list" autocomplete="off" aria-keyshortcuts="/" placeholder="Què vols que faci Claude? Per exemple: revisar disseny">
+        <kbd aria-hidden="true">/</kbd>
+      </div>
+      <div class="palette-body">
+        <div class="results-wrap">
+          <p class="count" id="count" aria-live="polite"></p>
+          <ul class="results" id="results" role="listbox" aria-label="Skills"></ul>
+          <div class="empty" id="empty" hidden>
+            <p id="empty-msg"></p>
+            <button type="button" id="reset">Treu els filtres</button>
+          </div>
+        </div>
+        <article class="preview" id="preview" aria-live="polite"></article>
+      </div>
+    </div>
+    <p class="keys">Amb el teclat: <kbd>↑</kbd> <kbd>↓</kbd> per moure't, <kbd>Retorn</kbd> per obrir-la al mapa i <kbd>Esc</kbd> per esborrar la cerca.</p>
+  </section>
+
+  <footer class="foot">
+    <p>Vols més skills? En trobaràs al directori de plugins de claude.ai i a GitHub. Abans d'instal·lar-ne una, mira'n la llicència i si demana compte o pagament.</p>
+    <p>Altres maneres de veure aquest catàleg: <a href="index.html">versió Bauhaus</a>, <a href="apple.html">versió minimalista</a> i <a href="fanzine.html">fanzine</a>.</p>
+  </footer>
+
+  <script src="skills.js?v=20260928b"></script>
+  <script src="mapa.js?v=20260928b"></script>
+</body>
+</html>
