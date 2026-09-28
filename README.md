@@ -64,7 +64,7 @@ A `.claude/skills/` hi ha skills que Claude Code carrega automàticament quan tr
 
 ### Dissenyador web
 
-`.claude/agents/dissenyador-web.md` és un subagent de Claude Code que genera pàgines web aplicant les skills anteriors sempre en el mateix ordre:
+`.claude/agents/jb-agent-dissenyador-web.md` és un subagent de Claude Code que genera pàgines web aplicant les skills anteriors sempre en el mateix ordre:
 
 1. Brief (com a màxim 3 preguntes)
 2. `ui-ux-pro-max`: paleta, tipografia i estil
@@ -74,11 +74,11 @@ A `.claude/skills/` hi ha skills que Claude Code carrega automàticament quan tr
 6. `webapp-testing`: captures i proves (si alguna falla, torna al pas 4)
 7. `impeccable polish`
 
-Crea sempre fitxers nous (no toca les versions existents), ho allotja tot a `vendor/` i no fa servir res que demani compte o pagament. Per fer-lo servir, obre una sessió nova de Claude Code en aquest repo i demana, per exemple: *"Fes servir el dissenyador-web per crear una pàgina de…"*. Per canviar-lo, edita el fitxer directament o demana-ho a Claude.
+Crea sempre fitxers nous (no toca les versions existents), ho allotja tot a `vendor/` i no fa servir res que demani compte o pagament. Per fer-lo servir, obre una sessió nova de Claude Code en aquest repo i demana, per exemple: *"Fes servir el jb-agent-dissenyador-web per crear una pàgina de…"*. Per canviar-lo, edita el fitxer directament o demana-ho a Claude.
 
 ### Calcador d'estil
 
-`.claude/agents/calcador-estil.md` crea una pàgina nova amb el contingut que li indiquis, però amb l'estètica d'una pàgina de referència (un fitxer del repo o una URL). Els passos són:
+`.claude/agents/jb-agent-calcador-estil.md` crea una pàgina nova amb el contingut que li indiquis, però amb l'estètica d'una pàgina de referència (un fitxer del repo o una URL). Els passos són:
 
 1. Observa la referència (codi i captures)
 2. Escriu una fitxa d'estil a `estils/<referència>.md` (tokens, maquetació, components, motius i el que no fa)
@@ -87,4 +87,4 @@ Crea sempre fitxers nous (no toca les versions existents), ho allotja tot a `ven
 5. Compara la pàgina nova amb la referència (captures i estils calculats)
 6. Passa les proves de qualitat
 
-D'una web externa en copia l'estil, però no la marca, les imatges ni els textos. Exemple: *"Fes servir el calcador-estil per crear una pàgina amb el meu currículum amb l'estil d'apple.html"*.
+D'una web externa en copia l'estil, però no la marca, les imatges ni els textos. Exemple: *"Fes servir el jb-agent-calcador-estil per crear una pàgina amb el meu currículum amb l'estil d'apple.html"*.

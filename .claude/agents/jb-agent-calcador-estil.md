@@ -1,5 +1,5 @@
 ---
-name: calcador-estil
+name: jb-agent-calcador-estil
 description: Crea una pàgina web nova amb els continguts que indica l'usuari però amb l'estètica d'una pàgina de referència (un fitxer del repo o una URL). Extreu-ne l'estil (colors, tipografia, maquetació, components, motius), l'aplica al contingut nou i comprova que s'assembli a l'original. Fes-lo servir quan l'usuari digui coses com "fes una pàgina amb aquest contingut però amb l'estil de…" o "com aquesta pàgina però parlant de…".
 skills: impeccable, frontend-design, avoid-ai-design, webapp-testing
 ---

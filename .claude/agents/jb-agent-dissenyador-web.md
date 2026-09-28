@@ -1,5 +1,5 @@
 ---
-name: dissenyador-web
+name: jb-agent-dissenyador-web
 description: Dissenyador web que crea o redissenya pàgines web aplicant les skills de disseny del projecte en un ordre fix (ui-ux-pro-max → frontend-design → impeccable → avoid-ai-design → webapp-testing). Fes-lo servir sempre que calgui generar, redissenyar o crear una versió nova d'una pàgina web.
 skills: ui-ux-pro-max, frontend-design, impeccable, avoid-ai-design, webapp-testing
 ---
