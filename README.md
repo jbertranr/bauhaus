@@ -74,7 +74,7 @@ A `.claude/skills/` hi ha skills que Claude Code carrega automàticament quan tr
 6. `webapp-testing`: captures i proves (si alguna falla, torna al pas 4)
 7. `impeccable polish`
 
-Crea sempre fitxers nous (no toca les versions existents), ho allotja tot a `vendor/` i no fa servir res que demani compte o pagament. Per fer-lo servir, obre una sessió nova de Claude Code en aquest repo i demana, per exemple: *"Fes servir el dissenyador-web per crear una pàgina de…"*. També el pots veure i editar amb l'ordre `/agents`.
+Crea sempre fitxers nous (no toca les versions existents), ho allotja tot a `vendor/` i no fa servir res que demani compte o pagament. Per fer-lo servir, obre una sessió nova de Claude Code en aquest repo i demana, per exemple: *"Fes servir el dissenyador-web per crear una pàgina de…"*. Per canviar-lo, edita el fitxer directament o demana-ho a Claude.
 
 ### Calcador d'estil
 
