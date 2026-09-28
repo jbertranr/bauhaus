@@ -60,7 +60,9 @@ A `.claude/skills/` hi ha skills que Claude Code carrega automàticament quan tr
   playwright install chromium
   ```
 
-## Agent dissenyador
+## Agents
+
+### Dissenyador web
 
 `.claude/agents/dissenyador-web.md` és un subagent de Claude Code que genera pàgines web aplicant les skills anteriors sempre en el mateix ordre:
 
@@ -73,3 +75,16 @@ A `.claude/skills/` hi ha skills que Claude Code carrega automàticament quan tr
 7. `impeccable polish`
 
 Crea sempre fitxers nous (no toca les versions existents), ho allotja tot a `vendor/` i no fa servir res que demani compte o pagament. Per fer-lo servir, obre una sessió nova de Claude Code en aquest repo i demana, per exemple: *"Fes servir el dissenyador-web per crear una pàgina de…"*. També el pots veure i editar amb l'ordre `/agents`.
+
+### Calcador d'estil
+
+`.claude/agents/calcador-estil.md` crea una pàgina nova amb el contingut que li indiquis, però amb l'estètica d'una pàgina de referència (un fitxer del repo o una URL). Els passos són:
+
+1. Observa la referència (codi i captures)
+2. Escriu una fitxa d'estil a `estils/<referència>.md` (tokens, maquetació, components, motius i el que no fa)
+3. Decideix quin component de la referència fa servir per a cada bloc del contingut nou
+4. Construeix la pàgina en fitxers nous
+5. Compara la pàgina nova amb la referència (captures i estils calculats)
+6. Passa les proves de qualitat
+
+D'una web externa en copia l'estil, però no la marca, les imatges ni els textos. Exemple: *"Fes servir el calcador-estil per crear una pàgina amb el meu currículum amb l'estil d'apple.html"*.
