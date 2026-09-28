@@ -11,7 +11,7 @@ Hi ha quatre versions que comparteixen les dades de `skills.js`:
 - `fanzine.html`: versió fanzine, impresa a dues tintes com una risografia (rosa fluorescent i blau), amb il·lustracions SVG dibuixades per a cada categoria. Tipografies Bricolage Grotesque i Atkinson Hyperlegible (OFL) a `vendor/fonts/` i icones Phosphor duotone (MIT) a `vendor/phosphor/`.
 - `mapa.html`: les skills com un mapa de metro (cada línia és una categoria i cada parada, una skill) amb una consola de cerca a sota. La consola ordena els resultats per rellevància, es fa servir amb el teclat i explica com s'obté cada skill. Tipografia Atkinson Hyperlegible i icones Phosphor light.
 
-A més, `social360.html` és una pàgina independent sobre el projecte Social 360 (Expedient Social Universal) de l'Ajuntament de Mataró, finançat amb fons Next Generation EU. El llenguatge visual s'inspira en la web de Notion (sense marca ni logotips) i fa servir les tipografies Geist i Newsreader (OFL), a `vendor/fonts/`.
+A més, `social360.html` és una pàgina independent sobre el projecte Social 360 (Expedient Social Universal) de l'Ajuntament de Mataró, finançat amb fons Next Generation EU. El llenguatge visual s'inspira en la web de Notion (sense marca ni logotips) i fa servir les tipografies Geist i Newsreader (OFL), a `vendor/fonts/`. Des del botó «Estat del projecte» s'hi accedeix a `social360-seguiment.html`, el seguiment integral del projecte (estat de les 62 fitxes, riscos, dependències, fases i accions), amb dades a `social360-dades.js`.
 
 Obre qualsevol dels fitxers al navegador. No cal compilar res.
 
@@ -39,6 +39,8 @@ La `categoria` ha de ser una de les de `CATEGORIES`. Per crear-ne una de nova, a
 - `fanzine.css`, `fanzine.js`: estils, lògica i il·lustracions de la versió fanzine
 - `mapa.css`, `mapa.js`: estils, traçat del mapa i consola de la versió mapa
 - `social360.html`, `social360.css`: pàgina del projecte Social 360
+- `social360-seguiment.html`, `social360-seguiment.css`, `social360-seguiment.js`: seguiment integral del projecte, amb gràfic per eixos, fitxes filtrables i enllaços a cada fitxa
+- `social360-dades.js`: dades del seguiment (sense noms de persones ni detalls de seguretat)
 
 ## Skills del projecte
 
