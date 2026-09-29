@@ -57,8 +57,10 @@
 .flist span { font-size: 15px; line-height: 1.5; color: var(--ink-2); }
 .flist .fc-code { padding: 0; }
 
-/* Crida final */
-.fun-cta { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+/* Crida final, amb foto */
+.fun-cta { display: flex; align-items: center; justify-content: space-between; gap: 64px; }
+.fun-cta-text { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.foto-fig { flex: 0 1 480px; width: 100%; max-width: 480px; margin: 0; }
 .fun-cta h2 { font-size: clamp(30px, 3.5vw, 40px); letter-spacing: -0.035em; line-height: 1.1; }
 .fun-cta p { font-size: 18px; color: var(--muted); }
 
@@ -74,6 +76,8 @@
   .fun-art { flex: none; align-self: center; max-width: 260px; }
   .fsec-art { flex: none; align-self: center; max-width: 260px; }
   .fcards, .flist { grid-template-columns: minmax(0, 1fr); }
+  .fun-cta { flex-direction: column; align-items: flex-start; gap: 32px; }
+  .fun-cta .foto-fig { flex: none; max-width: none; }
 }
 @media (max-width: 480px) {
   .auds, .systems { grid-template-columns: minmax(0, 1fr); }

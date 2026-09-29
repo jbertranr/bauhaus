@@ -160,6 +160,11 @@ h1, h2, h3, p { margin: 0; }
 
 .more { margin: 0; }
 
+/* Fotografies (preparades amb .claude/skills/jb-skill-fotografies) */
+.foto { display: block; width: 100%; height: auto; border-radius: var(--radius); background: var(--panel); }
+.foto-peu { margin-top: 8px; font-size: 13px; color: var(--faint); }
+.foto-peu a { color: inherit; text-decoration: underline; }
+
 /* Proximitat */
 .band {
   display: flex; align-items: center; gap: 80px;

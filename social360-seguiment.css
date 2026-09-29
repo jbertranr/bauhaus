@@ -22,6 +22,7 @@
 .seg-art { display: block; height: auto; color: var(--ink); }
 .seg-hero .seg-art { flex: 0 1 320px; width: 100%; max-width: 320px; }
 .split-head .seg-art { flex: 0 1 300px; width: 100%; max-width: 300px; }
+.split-head .foto-fig { flex: 0 1 420px; width: 100%; max-width: 420px; margin: 0; }
 
 /* Xifres */
 .stats { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
@@ -182,6 +183,7 @@
   .seg-hero { flex-direction: column; align-items: flex-start; }
   .seg-hero .seg-art { flex: none; align-self: center; max-width: 240px; }
   .split-head .seg-art { flex: none; align-self: center; max-width: 240px; }
+  .split-head .foto-fig { flex: none; max-width: none; }
   .summary, .deps, .phases, .risk-groups { grid-template-columns: minmax(0, 1fr); }
   .bar-row { grid-template-columns: minmax(0, 1fr); gap: 8px; }
   .bar-meta { flex-direction: row; gap: 16px; }

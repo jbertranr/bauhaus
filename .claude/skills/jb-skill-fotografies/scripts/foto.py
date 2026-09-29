@@ -126,6 +126,8 @@ def main():
         old.unlink()
     w0, h0 = clean.size
     widths = [w for w in WIDTHS if w <= w0] or [w0]
+    if w0 - widths[-1] > 120:          # l'original queda entre dues mides: n'aprofitem tota l'amplada
+        widths.append(w0)
     written = []
     for w in widths:
         h = round(w * h0 / w0)
@@ -136,7 +138,7 @@ def main():
     add_credit(nom, args)
 
     rel = lambda path: path.relative_to(ROOT).as_posix()
-    mid = next((x for x in written if x[0] == 960), written[-1])
+    mid = next((x for x in written if x[0] >= 960), written[-1])
     srcset = ", ".join(f"{rel(o)} {w}w" for w, _, o in written)
     tag = (f'<img class="foto" src="{rel(mid[2])}" srcset="{srcset}" sizes="{html.escape(args.sizes)}" '
            f'width="{mid[0]}" height="{mid[1]}" loading="lazy" decoding="async" alt="{html.escape(args.alt)}">')
