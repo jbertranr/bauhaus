@@ -66,6 +66,13 @@ A `.claude/skills/` hi ha skills que Claude Code carrega automàticament quan tr
   pip install playwright
   playwright install chromium
   ```
+- `jb-skill-fotografies`: skill pròpia per incorporar fotografies a les pàgines. Comprova l'origen, la llicència i la privacitat de cada foto (res de persones usuàries identificables sense consentiment) i, amb l'script `scripts/foto.py`, treu les metadades (també el GPS), retalla a una proporció fixa, la tenyeix sempre amb un color de la paleta (blau, verd, groc o vermell, segons l'àmbit), genera WebP en diverses mides a `vendor/img/`, registra els crèdits a `vendor/img/CREDITS.md` i dona l'etiqueta `<img>` amb `srcset`. Cal Pillow:
+
+  ```
+  pip install pillow
+  python3 .claude/skills/jb-skill-fotografies/scripts/foto.py foto.jpg --nom oficina --ratio 4:3 --tint blau \
+    --autoria "Ajuntament de Mataró" --llicencia "Ús autoritzat" --origen "Arxiu municipal" --alt "Taulell d'atenció"
+  ```
 
 ## Agents
 
