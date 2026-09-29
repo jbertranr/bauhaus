@@ -79,7 +79,7 @@ python3 .claude/skills/jb-skill-fotografies/scripts/foto.py ORIGINAL --nom NOM -
   - gira la foto segons l'orientació de la càmera;
   - retalla a la proporció;
   - la tenyeix amb el tint triat;
-  - genera WebP de 480, 960, 1440 i 2000 px d'amplada (només les mides que no superin l'original) a `vendor/img/`;
+  - genera WebP de 480, 960, 1440 i 2000 px d'amplada (només les que no superin l'original, més l'amplada original si queda entre dues mides) a `vendor/img/`;
   - afegeix una fila a `vendor/img/CREDITS.md`;
   - imprimeix l'etiqueta `<img>` llesta per enganxar, amb `srcset`, `sizes`, `width`, `height`, `loading` i `alt`.
 - Si l'original fa menys de 960 px d'amplada, avisa l'usuari que es veurà borrosa en pantalles grans.
